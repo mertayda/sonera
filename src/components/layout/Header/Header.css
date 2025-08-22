@@ -1,0 +1,55 @@
+.module-contact{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.module-search{
+    display: flex;
+    gap: 10px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height:80px;
+    margin-left: 10px;
+ ;
+   
+   
+
+}
+
+
+.module-search::after{
+    position: absolute;
+    content: "";
+    display: block;
+    width: 1px;
+    border-left:1px solid #e6eaef;
+    align-self:stretch;
+    height: 100%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    pointer-events:none;
+    
+    
+}
+
+
+
+.dropdown-link{
+   transition: all 0.3s ease-in;
+   border-bottom: none !important;
+}
+
+.dropdown-link:hover{
+   
+ border-bottom: 1px solid #0D6EFD;
+}
+
+.dropdown-link:hover a{
+ color: #0D6EFD !important;
+}

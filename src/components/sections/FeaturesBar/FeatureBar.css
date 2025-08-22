@@ -1,0 +1,28 @@
+.feature-section{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: auto;
+    border: none;
+    transform: translateY(-50%);
+    z-index: 9999;
+    background-color: white;
+   
+}
+
+
+
+.feature-card{
+    max-width: 250px;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+}
+
+.feature-card-big{
+    max-width: 450px;
+    width: 100%;
+    position: relative;
+    padding:1rem;
+    border:none;
+    color: white;
+    
+}
