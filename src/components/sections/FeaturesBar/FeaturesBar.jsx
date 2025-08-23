@@ -39,29 +39,22 @@ const FeaturesBar = () => {
       <div className="container">
         <div className="feature-section">
           <div className="row justify-content-center">
-            {features.map((item, index) => (
-              <div
-                className= {item.reservation ? "feature-card-big" : "feature-card"} 
-                 key={index}
-                  style={
-                  item.reservation && {
-                    backgroundImage: `linear-gradient(rgba(80, 152, 180, 0.85), rgba(80, 152, 180, 0.85)), url(${item.reservation})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                 
+            {features.map((item,index) => {
+                const TruereserVation = Boolean(item.reservation)
+                 return (
+                  <div  key={index} className={TruereserVation ? "feature-card-big" : " feature-card"}>
+                    <h5 className="fw-ligh text-primary">{item.title}</h5>
+                    <p className="fw-ligh">{item.text}</p>
+                     {!TruereserVation  &&  <a  className="badge text-bg-primary" href={item.link}>{item.direct}</a>}
 
-                  }
-                }
-              >
-                {item.badge && <img src={item.badge} className="position-absolute top-0 end-0 "></img>}
-                <h5>{item.title}</h5>
-                <p>{item.text}</p>
-                <a className="badge text-bg-success" href={item.link}>
-                  {" "}
-                  <MoveRight></MoveRight> {item.direct}
-                </a>
-              </div>
-            ))}
+                </div>
+                 )
+            })}
+
+
+          
+        
+         
           </div>
         </div>
       </div>

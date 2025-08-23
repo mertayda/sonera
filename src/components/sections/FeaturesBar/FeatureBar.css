@@ -2,7 +2,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     height: auto;
     border: none;
-    transform: translateY(-50%);
+    transform: translateY(-20%);
     z-index: 9999;
     background-color: white;
    
@@ -15,14 +15,39 @@
     width: 100%;
     padding: 1rem;
     border: none;
+    color: black;
 }
 
+
+.feature-card h5{
+    font-size: 15px !important;
+}
+
+.feature-card p {
+    
+    font-size: 13px !important;
+
+}
+
+
+
 .feature-card-big{
-    max-width: 450px;
+    max-width: 550px;
     width: 100%;
     position: relative;
     padding:1rem;
     border:none;
     color: white;
+    background-image: linear-gradient(rgba(85, 138, 189, 0.7), rgba(114, 175, 199, 0.7)),
+  url("../../../assets/images/reservation.jpg");;
+    background-size: cover;
+    background-repeat: no-repeat;
+   background-position: center top;
+   
     
+    
+}
+
+.feature-card-big h5{
+    color: #ffff !important;
 }
