@@ -1,5 +1,5 @@
 import React from "react";
-import { MoveRight } from "lucide-react";
+import { Move, MoveRight } from "lucide-react";
 import badge from "../../../assets/images/badge.png";
 import reservation from "../../../assets/images/reservation.jpg";
 import "./FeatureBar.css"
@@ -38,15 +38,19 @@ const FeaturesBar = () => {
     <section>
       <div className="container">
         <div className="feature-section">
-          <div className="row justify-content-center">
+          <div className="row flex-column flex-md-row  align-items-stretch h-100">
             {features.map((item,index) => {
                 const TruereserVation = Boolean(item.reservation)
                  return (
                   <div  key={index} className={TruereserVation ? "feature-card-big" : " feature-card"}>
-                    <h5 className="fw-ligh text-primary">{item.title}</h5>
-                    <p className="fw-ligh">{item.text}</p>
-                     {!TruereserVation  &&  <a  className="badge text-bg-primary" href={item.link}>{item.direct}</a>}
-
+                    <h5 className="text-primary">{item.title}</h5>
+                    <p className="">{item.text}</p>
+                     {!TruereserVation  &&  <a  className="d-flex justify-content-center align-items-center  align-strecth  badge text-bg-primary   mt-auto  d-inline-flex gap-2" href={item.link}>
+                      <MoveRight size={20}></MoveRight>
+                      {item.direct}
+                          
+                      </a>}
+                    {TruereserVation && <img className="position-absolute top-0 end-0" src={item.badge}></img>}
                 </div>
                  )
             })}

@@ -38,7 +38,7 @@ const HeroCarousel = () => {
         >
           <div className="container-fluid d-flex mx-auto justify-content-center align-items-center mx-auto ">
             <div className="row d-flex justify-content-center justify-content-lg-between  position-absolute top-50 translate-middle-y px-5 gap-5 gap-md-0 gap-5">
-              <div className="col-12 col-lg-8">
+              <div className="col-12 col-lg-8 text-center text-md-start">
                 <div className="row">
                     <div className="col">
                      <div className="d-flex flex-column  justify-content-start">
@@ -56,8 +56,8 @@ const HeroCarousel = () => {
                 </div>
                     </div>
                 </div>
-                <div className="d-flex flex-row gap-2">
-                  <button className="btx">More About Us</button>
+                <div className="d-inline-flex  flex-column  flex-md-row gap-2">
+                  <button className="btx ">More About Us</button>
                   <button className="btn btn-secondary">Our services</button>
                 </div>
               </div>

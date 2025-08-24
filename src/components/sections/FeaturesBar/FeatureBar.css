@@ -1,53 +1,90 @@
 .feature-section{
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: auto;
     border: none;
+    width: 100%;
     transform: translateY(-20%);
     z-index: 9999;
     background-color: white;
+    min-height: 200px;
+
+   
    
 }
 
 
 
 .feature-card{
-    max-width: 250px;
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
-    padding: 1rem;
+    padding: 1.8rem;
     border: none;
     color: black;
+    height: 100%;
+    border-right: 1px solid #E6EAEF;
+}
+
+.feature-card:last-child{
+    border: none;
 }
 
 
 .feature-card h5{
-    font-size: 15px !important;
+    font-size: 1rem !important;
 }
 
 .feature-card p {
-    
-    font-size: 13px !important;
+
+    font-size: 15px !important;
+    font-weight: 300;
 
 }
 
 
 
 .feature-card-big{
-    max-width: 550px;
+   flex:2;
     width: 100%;
     position: relative;
-    padding:1rem;
+     padding: 1.8rem;
     border:none;
     color: white;
     background-image: linear-gradient(rgba(85, 138, 189, 0.7), rgba(114, 175, 199, 0.7)),
   url("../../../assets/images/reservation.jpg");;
     background-size: cover;
     background-repeat: no-repeat;
-   background-position: center top;
+   background-position: center center;
+
    
     
     
+}.feature-card a,
+.feature-card-big a {
+  margin-top: auto;  
+  align-self: flex-start; 
 }
 
 .feature-card-big h5{
     color: #ffff !important;
+    font-weight: bold !important;
+}
+
+.feature-card-big p {
+    font-weight: normal !important;
+}
+
+
+@media (max-width:768px) {
+
+    .feature-section{
+              transform: translateY(0);
+    }
+
+    .feature-card{
+        border: none;
+    }
+
+    
 }
