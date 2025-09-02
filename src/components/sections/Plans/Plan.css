@@ -1,0 +1,106 @@
+.services{
+  background-color: #F3F7FB;
+  padding: 5rem 1rem;
+}
+
+
+.services-title{
+    color: #8DE0FE;
+    letter-spacing: 5px;
+}
+
+
+
+.carousel-container {
+   overflow: hidden;
+
+
+}
+
+
+.slides-container{
+    display: flex;
+    transition: 0.3s all ease-in;
+    gap: 1rem;
+
+  
+}
+
+
+
+.slide-width{
+     min-width: 100%;
+     box-sizing: border-box;
+    
+}
+
+
+.simpleSlide-Container{
+  display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+
+   gap: 10px; 
+}
+
+
+
+.simpleSlide {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+  background-color: white;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15),
+              0 3px 6px rgba(0, 0, 0, 0.08);
+  padding: 0.625rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
+  border-radius: 15px;
+  height: 100%;
+}
+
+
+
+.simpleSlide-body{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0.5rem;
+  flex: 1 1 auto;
+}
+
+
+
+
+.allSlides {
+  display: flex;
+  gap: 10px;
+  transition: transform 0.3s ease-in-out; 
+}
+
+
+
+.dot {
+  display: flex;
+   border: none; 
+   background: transparent;
+  padding: 0;
+   cursor: pointer; 
+   gap: 1rem;
+ 
+  }
+.dot span {
+  display: block;
+  width: 30px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #ccc; transition: all .3s ease-in-out;
+}
+.dot:hover span { 
+  background-color: #999;
+   transform: scaleY(1.3);
+   }
+.dot.active span { 
+  background-color: #0d6efd;
+   width: 40px; 
+  }

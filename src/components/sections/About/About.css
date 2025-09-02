@@ -1,3 +1,4 @@
+
 .about-p{
     color: #8DE0FE;
     letter-spacing: 5px;
@@ -5,7 +6,14 @@
 .about-img {
      position: relative;
      overflow: hidden;
+     border-radius: 26px;
 }
+
+
+.about-img img{
+      box-shadow: 0 4px 12px rgba(25, 57, 105, 0.18);
+}
+
  .about-banner {
      position: absolute;
      left: 8%;
@@ -19,13 +27,60 @@
      height: 220px;
      padding: 1.1rem 1.25rem;
      background: rgba(255, 255, 255, 0.96);
-     border: 2px solid #1E4873;
-   
      border-radius: 50%;
      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
      backdrop-filter: saturate(120%) blur(2px);
  
+ 
 }
+
+
+
+
+
+.about-banner::before{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    inset: 0;
+    padding: 7px;
+    background: conic-gradient(
+     #1E4873,
+    #0ea5e9,
+    #9BCB67,
+    #eab308,
+    #a855f7,
+    #ef4444,
+    #1E4873
+    );
+    z-index: -1;
+    transform:  rotate(0deg);
+    transition: all 0.3s all;
+      -webkit-mask: 
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;   /* Safari */
+          mask-composite: exclude; /* Diğerleri */
+
+}
+
+
+.about-banner::before{
+    animation: ring 2.4s linear infinite;
+      will-change: transform;
+}
+
+@keyframes ring {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+
+
+
+
  .about-banner h5 {
      color: #1E4873;
      font-weight: 600;
@@ -52,6 +107,9 @@
 
      
 }
+
+
+
  @media (max-width: 767.98px) {
      .about-banner {
          width: 170px;
