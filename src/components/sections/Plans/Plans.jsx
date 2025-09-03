@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./Plan.css";
 
 
@@ -20,7 +20,7 @@ export const services = [
   {
     title: "Comprehensive, Custom Services",
     description:
-      "Using proprietary products, practices and equipment, we inspect our work to ensure results meet our high standards.",
+      "Using our products and methods, we guarantee top-quality results..",
     linkD: "Read More",
     direct: "#",
     icon: ClipboardCheck,
@@ -86,24 +86,44 @@ export const services = [
 
 const Plans = () => {
 
+const [index,setIndex] = useState(0)
 
-   const [index,setIndex] = useState(0)
-
-const divider = () => {
-  let out = []
+  
+const divider =  useMemo(() => {
+    let out = []
    for(let i = 0; i<services.length;i+=4){
       out.push( services.slice(i,i+4)) 
    }
 
    return out;
-}
+}, [services])
+  
+let total = divider.length
 
-let goTo = () => {
-  setIndex(p => (p + 1) % total)
-}
 
-let total = divider().length
+
+let goTo = (p) => {
+  setIndex(p)
  
+}
+
+let next = () => {
+   setIndex((prev) => (prev + 1) % total)
+}
+
+
+
+useEffect(() => {
+  const timer =  setTimeout(() => {
+      next()
+    }, 2000)
+    
+      return () => clearTimeout(timer);
+
+},[index,total])
+
+
+
 
 
   return (
@@ -122,9 +142,9 @@ let total = divider().length
         <div className="row">
           <div className="carousel-container">
             <div className="slides-container" style={{transform : `translateX(-${index  * 100}% )`}} >
-               {divider().map((item, i) => (
+               {divider.map((item, i) => (
                   <div className="slide-width" key={i}>
-                      <div className="row simpleSlide-Container" key={i}>
+                      <div className="simpleSlide-Container">
                       {item.map((x,sub) => {
                          let Icon = x.icon
                          return( 
@@ -135,7 +155,7 @@ let total = divider().length
                               </div>
                               <h5 className="">{x.title}</h5>
                               <p>{x.description}</p>
-                              <button className="btn btn-success mt-auto align-self-start w-100">{x.linkD}</button>
+                              <button className="simpleBtn btn btn-success  mt-auto  w-100">{x.linkD}</button>
                             </div>
                             
 
@@ -155,7 +175,7 @@ let total = divider().length
           <div className="col-12 d-flex justify-content-center gap-2">
              <div className="dot">
              {Array.from({length:total}, ((_,i) => {
-               return <span onClick={goTo} key={i}></span>
+               return <span className={`${index === i ? "active" : ""}`}   onClick={() => goTo(i)} key={i}></span>
              }))}
              </div>
           </div>
