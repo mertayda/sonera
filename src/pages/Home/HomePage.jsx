@@ -4,6 +4,7 @@ import Hero from '../../components/sections/Hero/Hero'
 import FeaturesBar from '../../components/sections/FeaturesBar/FeaturesBar'
 import About from '../../components/sections/About/About'
 import Plans from '../../components/sections/Plans/Plans'
+import Offers from '../../components/sections/Offers/Offers'
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
         <FeaturesBar></FeaturesBar>
         <About></About>
         <Plans></Plans>
+        <Offers></Offers>
      </div>
   )
 }

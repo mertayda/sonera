@@ -89,7 +89,7 @@ const Plans = () => {
 const [index,setIndex] = useState(0)
 
   
-const divider =  useMemo(() => {
+const divider =  useMemo(() => {   // data chunk split it to 2 group with 4 element
     let out = []
    for(let i = 0; i<services.length;i+=4){
       out.push( services.slice(i,i+4)) 
@@ -116,14 +116,11 @@ let next = () => {
 useEffect(() => {
   const timer =  setTimeout(() => {
       next()
-    }, 2000)
+    }, 4000)
     
       return () => clearTimeout(timer);
 
 },[index,total])
-
-
-
 
 
   return (
@@ -164,17 +161,15 @@ useEffect(() => {
                       })}
                   </div>
                   </div>
-               )
-                 
-               )}
+               ) 
+             )}
             </div>
-             
           </div>
         </div>
         <div className="row   mt-3">
           <div className="col-12 d-flex justify-content-center gap-2">
              <div className="dot">
-             {Array.from({length:total}, ((_,i) => {
+             {Array.from({length:total}, ((_,i) => {   // create array according to formatted data length at hand
                return <span className={`${index === i ? "active" : ""}`}   onClick={() => goTo(i)} key={i}></span>
              }))}
              </div>
