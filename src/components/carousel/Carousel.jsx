@@ -5,10 +5,7 @@ import { WholeWord } from "lucide-react";
 const Carousel = ({ item }) => {
   const total = item.length;
 
-
   const duplicateCards = [...item, ...item, ...item]
-
-
 
 
   const [index,setIndex] = useState(0)
@@ -20,10 +17,38 @@ const Carousel = ({ item }) => {
 
   let startX = useRef(0)
   let sLeft = useRef(0)
-  let isAuto = useRef(null)
+
   let wholeRef = useRef(null)
   let firstChildWidth = useRef(null)
+  let autoInterval = useRef(null)
 
+
+  useEffect(() => {
+      autoInterval.current = setInterval(() => {
+       const cardMargin = getComputedStyle(firstChildWidth.current)
+        const ml = parseFloat(cardMargin.marginLeft)
+        const mr = parseFloat(cardMargin.marginRight)
+           wholeRef.current.scrollLeft +=  firstChildWidth.current.offsetWidth + ml + mr
+      },3000)
+
+      return () => clearInterval(autoInterval.current)
+  },[])
+
+
+
+
+
+const infiniteScroll = () => {
+   if(wholeRef.current.scrollLeft === 0){
+      wholeRef.current.classList.add("no-transition")
+      wholeRef.current.scrollLeft =  wholeRef.current.scrollWidth - 2 * wholeRef.current.offsetWidth
+       wholeRef.current.classList.remove("no-transition")
+   } else if( Math.ceil(wholeRef.current.scrollLeft) === wholeRef.current.scrollWidth -  wholeRef.current.offsetWidth ){
+        wholeRef.current.classList.add("no-transition")
+        wholeRef.current.scrollLeft = wholeRef.current.offsetWidth
+            wholeRef.current.classList.remove("no-transition")
+   }
+} 
 
 
 const dragStart = (e) =>{
@@ -40,6 +65,7 @@ const dragging = (e) =>{
   
 }
 
+
 const dragEnd = () => {
        setIsDragging(false)
 }
@@ -49,6 +75,7 @@ const dragEnd = () => {
     <div className="row  position-relative">
       <div
         className="carousel-card-container"
+        onScroll={infiniteScroll}
         onMouseDown={dragStart}
         onMouseMove={dragging}
         onMouseUp={dragEnd}

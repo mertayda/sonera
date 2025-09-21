@@ -3,9 +3,19 @@
      gap: 1rem;
     transition: all 0.3s ease;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch; 
+    scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
     
     
 }
+
+.carousel-card-container.no-transition{
+   transition: none;
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+}
+
 
 .carousel-card{
     position: relative;
@@ -22,8 +32,7 @@
     width: 100%;
     box-sizing: border-box;
      scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch; 
-  scroll-behavior: smooth;
+  
    user-select: none;
 
 
