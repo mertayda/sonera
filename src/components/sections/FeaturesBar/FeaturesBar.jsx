@@ -1,7 +1,9 @@
 import React from "react";
 import { Move, MoveRight } from "lucide-react";
-import badge from "../../../assets/images/badge.png";
-import reservation from "../../../assets/images/reservation.jpg";
+import badge from "../../../../public/images/badge.png";
+import reservation from "../../../../public/images/reservation.jpg"
+
+
 import "./FeatureBar.css"
 
 const FeaturesBar = () => {

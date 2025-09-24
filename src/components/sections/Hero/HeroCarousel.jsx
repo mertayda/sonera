@@ -1,6 +1,6 @@
 import React from "react";
-import slider1 from "../../../assets/images/slide1.jpg";
-import slider2 from "../../../assets/images/slide2.jpg";
+import slider1 from "../../../../public/images/slide1.jpg";
+import slider2 from "../../../../public/images/slide2.jpg";
 import { Play } from 'lucide-react';
 import "./Hero.css";
 

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "title": "Medical Facilities",
+    "img": "../../../images/Industry/1.jpg",
+    "hover": {
+      "title": "Medical Facilities",
+      "desc": "We understand the safety needs of your medical facility and our staff are trained to meet these needs.",
+      "discount": "20% Off Discount"
+    }
+  },
+  {
+    "id": "2",
+    "title": "Educational Institutions",
+    "img": "../../../images/Industry/2.jpg",
+    "hover": {
+      "title": "Educational Institutions",
+      "desc": "Clean and healthy environments help students and staff focus on learning and growth.",
+      "discount": "15% Off Discount"
+    }
+  },
+  {
+    "id": "3",
+    "title": "Corporate Offices",
+    "img": "../../../images/Industry/3.jpg",
+    "hover": {
+      "title": "Corporate Offices",
+      "desc": "Professional cleaning ensures a safe, productive, and welcoming workplace for employees and clients.",
+      "discount": "10% Off Discount"
+    }
+  },
+  {
+    "id": "4",
+    "title": "Hospitality",
+    "img": "../../../images/Industry/1.jpg",
+    "hover": {
+      "title": "Hospitality",
+      "desc": "Guests notice the details—our services ensure spotless and comfortable hospitality spaces.",
+      "discount": "25% Off Discount"
+    }
+  },
+  {
+    "id": "5",
+    "title": "Industrial Facilities",
+    "img": "../../../images/Industry/2.jpg",
+    "hover": {
+      "title": "Industrial Facilities",
+      "desc": "We handle large-scale industrial cleaning challenges to meet compliance and safety standards.",
+      "discount": "30% Off Discount"
+    }
+  },
+  {
+    "id": "6",
+    "title": "Retail Stores",
+    "img": "../../../images/Industry/3.jpg",
+    "hover": {
+      "title": "Retail Stores",
+      "desc": "A fresh and clean environment keeps customers comfortable and enhances your brand image.",
+      "discount": "18% Off Discount"
+    }
+  }
+]

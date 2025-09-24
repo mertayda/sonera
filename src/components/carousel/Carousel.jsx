@@ -5,71 +5,83 @@ import { WholeWord } from "lucide-react";
 const Carousel = ({ item }) => {
   const total = item.length;
 
-  const duplicateCards = [...item, ...item, ...item]
+  const duplicateCards = [...item, ...item, ...item];
 
+  const [stopAuto, setStopAuto] = useState(true)
+  const [isDragging, setIsDragging] = useState(false);
 
-  const [index,setIndex] = useState(0)
-  const [isDragging, setIsDragging] = useState(false)
- 
+  let startX = useRef(0);
+  let sLeft = useRef(0);
 
-
-
-
-  let startX = useRef(0)
-  let sLeft = useRef(0)
-
-  let wholeRef = useRef(null)
-  let firstChildWidth = useRef(null)
-  let autoInterval = useRef(null)
-
+  let wholeRef = useRef(null);
+  let firstChildWidth = useRef(null);
+  let autoInterval = useRef(null);
 
   useEffect(() => {
-      autoInterval.current = setInterval(() => {
-       const cardMargin = getComputedStyle(firstChildWidth.current)
-        const ml = parseFloat(cardMargin.marginLeft)
-        const mr = parseFloat(cardMargin.marginRight)
-           wholeRef.current.scrollLeft +=  firstChildWidth.current.offsetWidth + ml + mr
-      },3000)
-
-      return () => clearInterval(autoInterval.current)
-  },[])
-
-
-
-
-
-const infiniteScroll = () => {
-   if(wholeRef.current.scrollLeft === 0){
-      wholeRef.current.classList.add("no-transition")
-      wholeRef.current.scrollLeft =  wholeRef.current.scrollWidth - 2 * wholeRef.current.offsetWidth
-       wholeRef.current.classList.remove("no-transition")
-   } else if( Math.ceil(wholeRef.current.scrollLeft) === wholeRef.current.scrollWidth -  wholeRef.current.offsetWidth ){
-        wholeRef.current.classList.add("no-transition")
-        wholeRef.current.scrollLeft = wholeRef.current.offsetWidth
-            wholeRef.current.classList.remove("no-transition")
-   }
-} 
-
-
-const dragStart = (e) =>{
-    setIsDragging(true)
-    startX.current = e.pageX
-    sLeft.current = wholeRef.current.scrollLeft
-}
-
-const dragging = (e) =>{
-     e.preventDefault();
-  if(!isDragging) return
-  const walkWithMe = e.pageX - startX.current
-    wholeRef.current.scrollLeft = sLeft.current - walkWithMe
+    if (!firstChildWidth.current || !wholeRef.current || !stopAuto) return;
   
-}
+    const cardMargin = getComputedStyle(firstChildWidth.current);
 
+    const ml = parseFloat(cardMargin.marginLeft);
+    const mr = parseFloat(cardMargin.marginRight);
+    const totalMr = ml + mr;
+    autoInterval.current = setInterval(() => {
+      
+         wholeRef.current.scrollLeft +=
+        firstChildWidth.current.offsetWidth + totalMr;
+    
+    }, 3000);
 
-const dragEnd = () => {
-       setIsDragging(false)
-}
+    return () => clearInterval(autoInterval.current);
+  }, [stopAuto]);
 
+  const infiniteScroll = () => {
+    if (wholeRef.current.scrollLeft === 0) {
+      wholeRef.current.classList.add("no-transition");
+      wholeRef.current.scrollLeft =
+        wholeRef.current.scrollWidth - 2 * wholeRef.current.offsetWidth;
+      wholeRef.current.classList.remove("no-transition");
+    } else if (
+      Math.ceil(wholeRef.current.scrollLeft) ===
+      wholeRef.current.scrollWidth - wholeRef.current.offsetWidth
+    ) {
+      wholeRef.current.classList.add("no-transition");
+      wholeRef.current.scrollLeft = wholeRef.current.offsetWidth;
+      wholeRef.current.classList.remove("no-transition");
+    }
+  };
+
+  const dragStart = (e) => {
+    setIsDragging(true);
+    setStopAuto(false)
+    startX.current = e.pageX;
+    sLeft.current = wholeRef.current.scrollLeft;
+    wholeRef.current.classList.add("dragging");
+  };
+
+  const dragging = (e) => {
+    if (!isDragging) return;
+    const walkWithMe = e.pageX - startX.current;
+    wholeRef.current.scrollLeft = sLeft.current - walkWithMe;
+  };
+
+  const dragEnd = () => {
+    setIsDragging(false);
+     setStopAuto(true)
+    wholeRef.current.classList.remove("dragging");
+  };
+
+  const touchStart = (e) => {
+    dragStart({ pageX: e.touches ? e.touches[0].pageX : e.pageX });
+  };
+
+  const touchMove = (e) => {
+    dragging({ pageX: e.touches ? e.touches[0].pageX : e.pageX });
+  };
+
+  const touchEnd = () => {
+    dragEnd();
+  };
 
   return (
     <div className="row  position-relative">
@@ -79,6 +91,9 @@ const dragEnd = () => {
         onMouseDown={dragStart}
         onMouseMove={dragging}
         onMouseUp={dragEnd}
+        onTouchStart={touchStart}
+        onTouchMove={touchMove}
+        onTouchEnd={touchEnd}
         ref={wholeRef}
       >
         {duplicateCards.map((li, i) => {
@@ -87,7 +102,7 @@ const dragEnd = () => {
             <div
               className="carousel-card"
               key={i}
-              ref={i === 0 ?  firstChildWidth : null}
+              ref={i === 0 ? firstChildWidth : null}
             >
               <div className="carousel-counter">{li.id}</div>
               <div className="carousel-icon mb-3">

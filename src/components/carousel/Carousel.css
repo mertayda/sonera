@@ -16,6 +16,12 @@
     scroll-snap-type: none;
 }
 
+.carousel-card-container.dragging{
+        scroll-behavior: auto;
+         scroll-snap-type: none;
+        
+}
+
 
 .carousel-card{
     position: relative;
@@ -93,6 +99,8 @@
 
 @media(max-width:768px){
     .carousel-card{
-        flex: 0 0 100%;
+        flex: 0 0 auto;
+        min-width: 100%;
+         scroll-snap-align: start;
     }
 }

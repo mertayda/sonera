@@ -49,7 +49,7 @@ const Process = () => {
                 <p className='fs-1'>Easy Steps For A Clean And Healthy Environment</p>
             </div>
         </div>
-      <Carousel item={features}></Carousel>
+          <Carousel item={features}></Carousel>
     </div>
     </section>
   )

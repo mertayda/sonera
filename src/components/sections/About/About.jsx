@@ -1,6 +1,6 @@
 import React from "react";
-import signature from "../../../assets/images/signature.png";
-import reservation from "../../../assets/images/reservation.jpg";
+import signature from "../../../../public/images/signature.png";
+import reservation from "../../../../public/images/reservation.jpg";
 import "./About.css";
 const About = () => {
   return (

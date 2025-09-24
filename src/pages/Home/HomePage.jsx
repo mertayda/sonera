@@ -6,6 +6,7 @@ import About from '../../components/sections/About/About'
 import Plans from '../../components/sections/Plans/Plans'
 import Offers from '../../components/sections/Offers/Offers'
 import Process from '../../components/sections/Process/Process'
+import Industry from '../../components/sections/Industry/Industry'
 
 const HomePage = () => {
   return (
@@ -17,6 +18,7 @@ const HomePage = () => {
         <Plans></Plans>
         <Offers></Offers>
         <Process></Process>
+        <Industry></Industry>
      </div>
   )
 }
