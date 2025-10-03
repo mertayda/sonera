@@ -120,7 +120,7 @@ useEffect(() => {
     
       return () => clearTimeout(timer);
 
-},[index,total])
+},[index])
 
 
   return (

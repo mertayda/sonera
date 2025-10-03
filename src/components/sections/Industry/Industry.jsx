@@ -1,47 +1,80 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./industry.css";
+
+// datayı çek
+// datayı ekran boyutuna göre chunk et
+// boyuta göre kıyas yapılıcak ona göre event ateşlenicek sonraında ise kıyas yapılşıcak ve  chunk veya diğer data türü map ile loopa sokulucak
+
+
 const Industry = () => {
   const [data, setData] = useState([]);
-  const [index,setIndex] = useState(0)
-  const [Isloading, setIsLoading] = useState();
+    const [top,setTop] = useState(false)
+  const [width,setWidth] = useState(window.innerWidth)
   const wholeRef = useRef(null)
-  const url = "/api/industry.json";
-  useEffect(() => {
-    fetch(url)
-      .then((res) => {
-        if (!res) throw new Error(`${res.status}`);
-        return res.json();
-      })
-      .then((comingData) => {
-        setData(comingData);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  
+  const  scrollGoLeft = useRef(0)
+  const  pageLeftX = useRef(0)
 
-  const divider = useMemo(() => {
-    let out = [];
-    for (let i = 0; i < data.length; i += 3) {
-      out.push(data.slice(i, i + 3));
+  const url = "/api/industry.json";
+
+
+
+
+useEffect(() => {
+    (async () => {
+        try{
+            const res = await fetch(url)
+        if(!res.ok) throw new Error("test")
+         const datax = await res.json()
+        setData(datax)
+        }
+        catch(err){
+          console.error(err)
+        }
+    })()
+},[url])
+
+
+  useEffect(() => {
+      const widthSize = () => {setWidth(window.innerWidth)}
+      widthSize()
+      window.addEventListener("resize",widthSize)
+      return () => window.removeEventListener("resize",widthSize)
+
+  },[])
+
+
+const chunk = useMemo(() => {
+    let out = []
+    let group = width > 768 ? 3 : 1
+    for(let i = 0 ; i<data.length; i+=group){
+      out.push(data.slice(i,i + group))
     }
 
-    return out;
-  }, [data]);
+    return out
+},[data,width])
+
+const mouseDown = (e) => {
+  setTop(true)
+  pageLeftX.current = e.pageX
+  scrollGoLeft.current = wholeRef.current.scrollLeft
+
+}
+
+const mouseMove = (e) => {
+  if(!top) return
+  wholeRef.current.scrollLeft =  scrollGoLeft.current  - (e.pageX - pageLeftX.current)
+  
+}
+
+const mouseUp = () => {
+     setTop(false)
+}
 
 
-const total = divider.length
+const goto = () => {
 
-const goto = (index) => {
-    setIndex(index)
-    wholeRef.current.style.transform = `translateX(-${index * 100}%)`  
-} 
-
-
-
-
-
-
+}
 
   return (
     <section className="Industry">
@@ -62,9 +95,9 @@ const goto = (index) => {
           </div>
         </div>
         <div className="row"> 
-          <div className="overflow-hidden">
-                  <div className="industry-whole" ref={wholeRef}>
-            {divider.map((item, index) => {
+          <div className="in">
+           <div className="industry-whole" ref={wholeRef} onMouseDown={mouseDown} onMouseUp={mouseUp} onMouseMove={mouseMove} >
+            {chunk.map((item, index) => {
               return (
                 <div key={index} className="industry-cards-container">
                   {item.map((subItem, subIndex) => {
@@ -100,8 +133,8 @@ const goto = (index) => {
         </div>
         <div className="row ">
           <div className="dot justify-content-center mt-3">
-            {Array.from({ length:total }, (_, i) => {
-              return <span  key={i} onClick={() => goto(i)}>  </span>;
+            {Array.from({ length:chunk.length }, (_, i) => {
+              return <span  key={i} onClick={() => goto()} >  </span>;
             })}
           </div>
         </div>

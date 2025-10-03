@@ -1,99 +1,110 @@
- .Industry{
-     padding: 5rem 1rem;
-     background: #103B6A;
-     color: white;
-}
- .industry-whole{
-     display: flex;
-     gap: 25px;
-     margin-top: 2rem;
-   
-     transition: all 0.3s ease-in-out;
-       -webkit-overflow-scrolling: touch; 
-    scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
-    
-     
-}
- .industry-cards-container{
-     display: flex;
-     width: 100%;
-     flex: 0 0 100%;
-     gap: 15px;
-    
-}
- .industry-card{
-     flex: 1 1 33.333%;
-     position: relative;
-     display: flex;
-     aspect-ratio: 4 / 3;
-     min-height: 200px;
-     background-position: center;
-     background-repeat: no-repeat;
-     background-size: cover;
-     box-sizing: border-box;
-     transition: all 0.3s ease-in-out;
-     
-}
- .industry-card::before{
-     content: "";
-     position: absolute;
-     inset: 0;
-     background: rgba(0,0,0,0.4);
-     transition: all 0.3s ease-in-out;
-}
- .industry-card:hover::before{
-     background: rgba(110, 125, 190, 0.4);
-}
- .industry-title, .industry-info{
-     display: flex;
-     flex-direction: column;
-     position: absolute;
-     text-align: center;
-     top: 50%;
-     left: 50%;
-     padding: 10px;
-     background-color: white;
-     color: #083463;
-     width: 60%;
-     border-radius: 5px;
-     transform: translate(-50%,-50%);
-     transition: all 0.3s ease-in-out;
-}
- .industry-info{
-     padding: 15px;
-     transform: translate(-50%,50%);
-     opacity: 0;
-}
- .industry-title{
-     opacity: 1;
-     transform: translate(-50%, -150%) 
-}
- .industry-card:hover .industry-info{
-     transform: translate(-50%,-50%);
-     opacity: 1;
-}
- .industry-card:hover .industry-title{
-     opacity: 0;
-     transform: translate(-50%,-50%);
+.Industry{
+  padding: 5rem 1rem;
+  background: #103B6A;
+  color: white;
 }
 
 
+.industry-whole{
+  display: flex;
+  gap: 25px;                     
+  margin-top: 2rem;
+  transition: all .3s ease-in-out;
+  overflow-x: auto;           
+  overflow-y: hidden;            
+
+}
+
+
+.industry-cards-container{
+  display: flex;
+  flex: 0 0 calc(100% - 25px);  
+  gap: 15px;                   
+  min-width: 0;                
+}
+
+
+.industry-card{
+  flex: 0 0 calc((100% - 30px) / 3);
+  position: relative;
+  display: flex;
+  aspect-ratio: 4 / 3;
+  min-height: 200px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  transition: all .3s ease-in-out;
+}
+
+
+.industry-card::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.4);
+  transition: all .3s ease-in-out;
+}
+.industry-card:hover::before{ background: rgba(110,125,190,.4); }
+
+.industry-title, .industry-info{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  padding: 10px;
+  background-color: white;
+  color: #083463;
+  width: 60%;
+  border-radius: 5px;
+  transform: translate(-50%,-50%);
+  transition: all .3s ease-in-out;
+}
+.industry-info{
+  padding: 15px;
+  transform: translate(-50%,50%);
+  opacity: 0;
+}
+.industry-title{
+  opacity: 1;
+  transform: translate(-50%,-150%);
+}
+.industry-card:hover .industry-info{
+  transform: translate(-50%,-50%);
+  opacity: 1;
+}
+.industry-card:hover .industry-title{
+  opacity: 0;
+  transform: translate(-50%,-50%);
+}
+
+/* DOTS */
 .dot{
-    display: flex;
-    border: none;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
-    gap: 0.6rem;
+  display: flex;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  gap: .6rem;
+}
+.dot span{
+  display: block;
+  width: 30px;
+  height: 4px;
+  border-radius: 2px;
+  background-color:#ccc;
+  transition: all .3s ease-in-out;
 }
 
-.dot span{
-    display: block;
-    width: 30px;
-    height: 4px;
-    border-radius: 2px;
-    background-color:#ccc;
-    transition: all .3s ease-in-out;
 
+@media (max-width: 768px){
+  .industry-cards-container{
+    flex: 0 0 calc(100% - 25px);
+    gap: 15px;
+  }
+  .industry-card{
+    flex: 0 0 100%;
+  }
 }
