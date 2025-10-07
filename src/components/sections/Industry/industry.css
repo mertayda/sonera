@@ -9,18 +9,31 @@
   display: flex;
   gap: 25px;                     
   margin-top: 2rem;
-  transition: all .3s ease-in-out;
-  overflow-x: auto;           
-  overflow-y: hidden;            
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+   -webkit-overflow-scrolling: touch; 
+    scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+
 
 }
+
+.industry-whole.auto{
+   scroll-behavior:auto;
+}
+
+
 
 
 .industry-cards-container{
   display: flex;
   flex: 0 0 calc(100% - 25px);  
   gap: 15px;                   
-  min-width: 0;                
+  min-width: 0;      
+  overflow-y: hidden;     
+ 
+  
+  
 }
 
 
@@ -35,6 +48,8 @@
   background-size: cover;
   box-sizing: border-box;
   transition: all .3s ease-in-out;
+  cursor: pointer;
+  
 }
 
 
@@ -98,6 +113,10 @@
   transition: all .3s ease-in-out;
 }
 
+
+.dot span.active{
+  background-color: red;
+}
 
 @media (max-width: 768px){
   .industry-cards-container{

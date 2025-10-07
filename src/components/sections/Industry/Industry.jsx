@@ -1,80 +1,112 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./industry.css";
 
-// datayı çek
-// datayı ekran boyutuna göre chunk et
-// boyuta göre kıyas yapılıcak ona göre event ateşlenicek sonraında ise kıyas yapılşıcak ve  chunk veya diğer data türü map ile loopa sokulucak
-
-
 const Industry = () => {
   const [data, setData] = useState([]);
-    const [top,setTop] = useState(false)
-  const [width,setWidth] = useState(window.innerWidth)
-  const wholeRef = useRef(null)
-  
-  const  scrollGoLeft = useRef(0)
-  const  pageLeftX = useRef(0)
-
+  const [top, setTop] = useState(false);
+  const [index,setIndex] = useState(0)
+  const [width, setWidth] = useState(window.innerWidth);
+  const wholeRef = useRef();
+  const scrollGoLeft = useRef(0);
+  const pageLeftX = useRef(0)
   const url = "/api/industry.json";
 
 
 
-
-useEffect(() => {
+  // fetching api from local
+  useEffect(() => {
     (async () => {
-        try{
-            const res = await fetch(url)
-        if(!res.ok) throw new Error("test")
-         const datax = await res.json()
-        setData(datax)
-        }
-        catch(err){
-          console.error(err)
-        }
-    })()
-},[url])
-
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("test");
+        const datax = await res.json();
+        setData(datax);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, [url]);
 
   useEffect(() => {
-      const widthSize = () => {setWidth(window.innerWidth)}
-      widthSize()
-      window.addEventListener("resize",widthSize)
-      return () => window.removeEventListener("resize",widthSize)
+    const widthSize = () => {
+      setWidth(window.innerWidth);
+    };
+    widthSize();
+    window.addEventListener("resize", widthSize);
+    return () => window.removeEventListener("resize", widthSize);
+  }, []);
 
-  },[])
-
-
-const chunk = useMemo(() => {
-    let out = []
-    let group = width > 768 ? 3 : 1
-    for(let i = 0 ; i<data.length; i+=group){
-      out.push(data.slice(i,i + group))
+  const chunk = useMemo(() => {
+    let out = [];
+    let group = width > 768 ? 3 : 1;
+    for (let i = 0; i < data.length; i += group) {
+      out.push(data.slice(i, i + group));
     }
 
-    return out
-},[data,width])
+    return out;
+  }, [data, width]);
 
-const mouseDown = (e) => {
-  setTop(true)
-  pageLeftX.current = e.pageX
-  scrollGoLeft.current = wholeRef.current.scrollLeft
+  const goTo = (i) => {
 
-}
+    setIndex(i) 
 
-const mouseMove = (e) => {
-  if(!top) return
-  wholeRef.current.scrollLeft =  scrollGoLeft.current  - (e.pageX - pageLeftX.current)
+  }
   
-}
 
-const mouseUp = () => {
-     setTop(false)
-}
+ useEffect(() => {
+      const firstWidth = wholeRef.current.children[0]?.offsetWidth
+     const w = wholeRef.current.scrollWidth - wholeRef.current.offsetWidth
+      if(wholeRef.current.scrollLeft >= w){
+      wholeRef.current.scrollLeft = 0
+  }  else{
+
+    wholeRef.current.scrollLeft = index * firstWidth
+  } 
+ },[index])
 
 
-const goto = () => {
 
-}
+
+  const mouseDown = (e) => {-
+    e.preventDefault()
+    setTop(true);
+    wholeRef.current.classList.add("auto")
+    pageLeftX.current = e.pageX;
+    scrollGoLeft.current = wholeRef.current.scrollLeft;
+  };
+
+  const mouseMove = (e) => {
+    if (!top) return;
+    wholeRef.current.scrollLeft =
+      scrollGoLeft.current - (e.pageX - pageLeftX.current);
+  };
+
+  const mouseUp = () => {
+    setTop(false);
+    wholeRef.current.classList.add("remove")
+  };
+
+  const touchStart = (e) => {
+    setTop(true)
+      wholeRef.current.classList.add("auto")
+    pageLeftX.current = e.touches[0].pageX
+    scrollGoLeft.current = wholeRef.current.scrollLeft;
+  };
+
+  const touchMove = (e) => {
+     if(!top) return
+      wholeRef.current.scrollLeft =
+      scrollGoLeft.current - (e.touches[0].pageX - pageLeftX.current);
+  };
+
+  const touchEnd = () => {
+    setTop(false)
+    wholeRef.current.classList.add("remove")
+  };
+
+
+
+
 
   return (
     <section className="Industry">
@@ -94,9 +126,17 @@ const goto = () => {
             <button className="btn btn-success">Request An Estimate</button>
           </div>
         </div>
-        <div className="row"> 
-          <div className="in">
-           <div className="industry-whole" ref={wholeRef} onMouseDown={mouseDown} onMouseUp={mouseUp} onMouseMove={mouseMove} >
+        <div className="row">
+          <div
+            className="industry-whole"
+            ref={wholeRef}
+            onMouseDown={mouseDown}
+            onMouseUp={mouseUp}
+            onMouseMove={mouseMove}
+            onTouchStart={touchStart}
+            onTouchMove={touchMove}
+            onTouchEnd={touchEnd}
+          >
             {chunk.map((item, index) => {
               return (
                 <div key={index} className="industry-cards-container">
@@ -128,13 +168,15 @@ const goto = () => {
               );
             })}
           </div>
-          </div>
-    
         </div>
         <div className="row ">
           <div className="dot justify-content-center mt-3">
-            {Array.from({ length:chunk.length }, (_, i) => {
-              return <span  key={i} onClick={() => goto()} >  </span>;
+            {Array.from({ length: chunk.length }, (_, i) => {
+              return (
+                <span className={ index === i ?  "active"  : ""}  key={i} onClick={() => goTo(i)}     >
+                  {" "}
+                </span>
+              );
             })}
           </div>
         </div>

@@ -1,0 +1,24 @@
+.estimate{
+    background: #9DCA42;
+    padding: 5rem 1rem;
+}
+
+
+.testimonial-container{
+    overflow: hidden;
+}
+
+.testimonial{
+ 
+    transition: all 0.3s ease;
+}
+
+.testimonial-cards{
+    overflow-x: hidden;
+    flex: 0 0 100%;
+}
+
+.estimate-form{
+    background: white;
+    padding: 1rem;
+}
