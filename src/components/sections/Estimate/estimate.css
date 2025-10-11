@@ -20,5 +20,6 @@
 
 .estimate-form{
     background: white;
-    padding: 1rem;
+    padding: 1.2rem;
+    border-radius: 10px;
 }
