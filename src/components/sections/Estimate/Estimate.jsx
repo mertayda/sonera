@@ -23,7 +23,6 @@ const Estimate = () => {
     },
   ];
 
-
   // form
   const [formData, setData] = useState({
     service: "clean",
@@ -35,32 +34,67 @@ const Estimate = () => {
     staircase: "",
     yes: true,
   });
-  const [error,setError] = useState("")
+  const [error, setError] = useState("");
+  const [anotherError, setAnotherError] = useState("");
 
-   const handleUpdate = (e) => {
-    const { name, value } = e.target;
-    setData(prev => ({...prev,[name]:type === number ? Number(value) : value }))
+  const handleUpdate = (e) => {
+    const { name, value, type, number } = e.target;
+    setData((prev) => ({
+      ...prev,
+      [name]: type === number ? Number(value) : value,
+    }));
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const service = String(formData.service || "").trim();
+    const typeLoop = String(formData.typeLoop || "").trim();
+    const facilityType = String(formData.facilityType || "").trim();
+    const yes = String(formData.yes || "").trim();
 
+    if (!service || !typeLoop || !facilityType || !yes) {
+      setAnotherError("test");
+      return;
+    }
+    if (
+      formData.room.length < 5 ||
+      formData.hallway.length < 5 ||
+      formData.staircase < 5
+    ) {
+      setError("Please fill the forms as according to rules");
+      return;
+    }
 
-const handleSubmit = (e) => {
-  e.preventDefault()
-  if(!formData.service ||  !formData.typeLoop || ! !formData.facilityType || !formData.yes) 
-  if(formData.room.length < 5  || formData.hallway.length > 8 || formData.staircase > 9){
-        setError("Please fill the forms as according to rules")
-  }
-  
-}
+    sendData(formData)
+      .then(() => {
+        console.log("its send");
+      })
+      .catch((error) => {
+        console.error(error, "error");
+      });
+  };
 
+  const sendData = async (data) => {
+    try {
+      const sendData = await fetch(
+        "https://jsonplaceholder.typicode.com/users",
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        }
+      );
+      if (!sendData.ok) throw new Error("cant post");
+      const res = await sendData.json();
+      console.log(res, "success");
+    } catch (error) {
+      console.error(error, "status error");
+    }
+  };
 
-// form validations
-
-
-
-
-
-// carousel
+  // carousel
 
   const [auto, setAuto] = useState(true);
   const [index, setIndex] = useState(0);
@@ -77,13 +111,9 @@ const handleSubmit = (e) => {
     setIndex((p) => (p - 1 + total) % total);
   };
 
- 
   useEffect(() => {
     testimonial.current.style.transform = `translateX(-${index * 100}%)`;
   }, [index]);
-
-
-
 
   useEffect(() => {
     if (!auto) return;
@@ -111,21 +141,21 @@ const handleSubmit = (e) => {
           <div className="col-6">
             <div className="row">
               <div className="col">
-                <p>We Always Strive for Excellence</p>
-                <h2>Your Clients & Employees Deserve A Clean Environment!!</h2>
-                <p>
+                <p className="text-white fst-italic">We Always Strive for Excellence</p>
+                <h2 className="text-white fs-1 w-75">Your Clients & Employees Deserve A Clean Environment!!</h2>
+                <p className="text-white w-75">
                   We continuously invest in our processes, our employees and our
                   relationship with every business we serve.{" "}
                 </p>
                 <div>
-                  <button className="btn btn-primary">Our products</button>
+                  <button className="btn btn-primary bg-button">Our products</button>
                 </div>
                 <div className="testimonial-container">
                   <div className="d-flex testimonial" ref={testimonial}>
                     {testimonials.map((item, index) => {
                       return (
-                        <div key={index} className="testimonial-cards card">
-                          <p>{item.text}</p>
+                        <div key={index} className="testimonial-cards">
+                          <p className="">{item.text}</p>
                           <span>{item.name}</span>
                         </div>
                       );
@@ -133,19 +163,20 @@ const handleSubmit = (e) => {
                   </div>
                 </div>
 
-                <button onClick={() => goTo()}>
-                  <ChevronRight />{" "}
+                <div className="d-flex gap-1">
+                   <button className="prev"  onClick={() => backTo()}>
+                       <ChevronLeft />
                 </button>
-                <button onClick={() => backTo()}>
-                  {" "}
-                  <ChevronLeft />{" "}
-                </button>
+                <button className="next" onClick={() => goTo()}>
+                           <ChevronRight />
+                </button> 
+                </div>
               </div>
             </div>
           </div>
           <div className="col-6 estimate-form">
-            <h2>Request An Estimate</h2>
-            <p>
+            <h2 className="estimate-header">Request An Estimate</h2>
+            <p className="estimate-info">
               For a cleaning that meets your highest standards, you need a
               dedicated team of trained specialists with all supplies needed to
               thoroughly clean your home.
@@ -168,6 +199,7 @@ const handleSubmit = (e) => {
                     <option value="clean1">Clean1</option>
                     <option value="clean2">Clean2</option>
                   </select>
+                  {anotherError && <p className="error">{anotherError} </p>}
                 </div>
 
                 <div className="col-6">
@@ -185,6 +217,7 @@ const handleSubmit = (e) => {
                     <option value="weekly">Weekly Regular</option>
                     <option value="monthly">Monthly Regular</option>
                   </select>
+                  {error && <p className="error">{error} </p>}
                 </div>
               </div>
               <div className="row">
@@ -203,6 +236,7 @@ const handleSubmit = (e) => {
                     <option value="educational">Educational</option>
                     <option value="govermental">Govermental</option>
                   </select>
+                  {error && <p className="error">{error}</p>}
                 </div>
 
                 <div className="col-6">
@@ -219,6 +253,7 @@ const handleSubmit = (e) => {
                     placeholder="test"
                     aria-label="Facility-name"
                   ></input>
+                  {error && <p className="error">{error}</p>}
                 </div>
               </div>
               <div className="row">
@@ -234,7 +269,7 @@ const handleSubmit = (e) => {
                     id="room"
                     className="form-control"
                   />
-                  {error &&  <p className="error">{error}</p> }
+                  {error && <p className="error">{error}</p>}
                 </div>
                 <div className="col-4">
                   <label htmlFor="hallway" className="form-label">
@@ -248,6 +283,7 @@ const handleSubmit = (e) => {
                     onChange={handleUpdate}
                     className="form-control"
                   />
+                  {error && <p className="error">{error}</p>}
                 </div>
                 <div className="col-4">
                   <label htmlFor="staircase" className="form-label">
@@ -261,10 +297,11 @@ const handleSubmit = (e) => {
                     id="staircase"
                     className="form-control"
                   />
+                  {error && <p className="error">{error}</p>}
                 </div>
               </div>
               <div className="row">
-                <h5 className="">
+                <h5 className="send-request-header">
                   Do you have all the necessary cleaning supplies?
                 </h5>
                 <div className="col-2">
@@ -276,7 +313,9 @@ const handleSubmit = (e) => {
                       type="radio"
                       id="checkChecked"
                       onChange={handleUpdate}
+                      required
                     />
+
                     <label className="form-check-label" htmlFor="checkChecked">
                       Yes
                     </label>
@@ -291,6 +330,7 @@ const handleSubmit = (e) => {
                       value={formData.yes}
                       id="checkChecked1"
                       onChange={handleUpdate}
+                      required
                     />
                     <label className="form-check-label" htmlFor="checkChecked1">
                       No
@@ -300,7 +340,7 @@ const handleSubmit = (e) => {
               </div>
               <div className="row">
                 <div className="col">
-                  <button  type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-primary bg-button">
                     Send
                   </button>
                 </div>

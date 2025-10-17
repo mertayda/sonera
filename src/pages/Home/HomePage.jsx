@@ -8,6 +8,7 @@ import Offers from '../../components/sections/Offers/Offers'
 import Process from '../../components/sections/Process/Process'
 import Industry from '../../components/sections/Industry/Industry'
 import Estimate from '../../components/sections/Estimate/Estimate'
+import Articles from '../../components/sections/Articles/Articles'
 
 
 const HomePage = () => {
@@ -22,6 +23,7 @@ const HomePage = () => {
         <Process></Process>
         <Industry></Industry>
         <Estimate></Estimate>
+        <Articles></Articles>
        
         
      </div>
