@@ -1,7 +1,7 @@
 import React from "react";
 import { Move, MoveRight } from "lucide-react";
-import badge from "../../../../public/images/badge.png";
-import reservation from "../../../../public/images/reservation.jpg"
+import badge from "../../../../../public/images/badge.png";
+import reservation from "../../../../../public/images/reservation.jpg"
 
 
 import "./FeatureBar.css"
@@ -37,7 +37,7 @@ const FeaturesBar = () => {
   ];
 
   return (
-    <section>
+    <section className="features">
       <div className="container">
         <div className="feature-section">
           <div className="row flex-column flex-md-row  align-items-stretch h-100">

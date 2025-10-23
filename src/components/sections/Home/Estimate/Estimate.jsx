@@ -138,7 +138,7 @@ const Estimate = () => {
     <div className="estimate">
       <div className="container">
         <div className="row">
-          <div className="col-6">
+          <div className="col-12 col-md-6">
             <div className="row">
               <div className="col">
                 <p className="text-white fst-italic">We Always Strive for Excellence</p>
@@ -174,7 +174,7 @@ const Estimate = () => {
               </div>
             </div>
           </div>
-          <div className="col-6 estimate-form">
+          <div className="col-12 col-md-6 estimate-form">
             <h2 className="estimate-header">Request An Estimate</h2>
             <p className="estimate-info">
               For a cleaning that meets your highest standards, you need a
@@ -183,7 +183,7 @@ const Estimate = () => {
             </p>
             <form onSubmit={handleSubmit} className="d-flex flex-column gap-4">
               <div className="row">
-                <div className="col-6">
+                <div className="col-12 col-md-6">
                   <label htmlFor="service-select" className="form-label">
                     Choose your service
                   </label>
@@ -202,7 +202,7 @@ const Estimate = () => {
                   {anotherError && <p className="error">{anotherError} </p>}
                 </div>
 
-                <div className="col-6">
+                <div className="col-12 col-md-6">
                   <label htmlFor="example-select" className="form-label">
                     Indicate type of cleaning
                   </label>
@@ -221,7 +221,7 @@ const Estimate = () => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-6">
+                <div className="col-12 col-md-6">
                   <label htmlFor="FacilityType" className="form-label">
                     Facility type
                   </label>
@@ -239,7 +239,7 @@ const Estimate = () => {
                   {error && <p className="error">{error}</p>}
                 </div>
 
-                <div className="col-6">
+                <div className="col-12 col-md-6">
                   <label htmlFor="Facility-name" className="form-label">
                     Facility name
                   </label>
@@ -257,7 +257,7 @@ const Estimate = () => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-4">
+                <div className="col-12 col-md-8 col-lg-4">
                   <label htmlFor="room" className="form-label">
                     Room(s)?
                   </label>
@@ -271,7 +271,7 @@ const Estimate = () => {
                   />
                   {error && <p className="error">{error}</p>}
                 </div>
-                <div className="col-4">
+                <div className="col-12 col-md-8 col-lg-4">
                   <label htmlFor="hallway" className="form-label">
                     Hallway(s)??
                   </label>
@@ -285,7 +285,7 @@ const Estimate = () => {
                   />
                   {error && <p className="error">{error}</p>}
                 </div>
-                <div className="col-4">
+                <div className="col-12 col-md-8 col-lg-4">
                   <label htmlFor="staircase" className="form-label">
                     Staircase(s)?
                   </label>
@@ -304,7 +304,7 @@ const Estimate = () => {
                 <h5 className="send-request-header">
                   Do you have all the necessary cleaning supplies?
                 </h5>
-                <div className="col-2">
+                <div className="col-12 col-md-4 col-lg-2">
                   <div clasName="form-check ">
                     <input
                       className="form-check-input"
@@ -321,7 +321,7 @@ const Estimate = () => {
                     </label>
                   </div>
                 </div>
-                <div className="col-2">
+                <div className="col-12 col-md-4 col-lg-2">
                   <div className="form-check">
                     <input
                       className="form-check-input"

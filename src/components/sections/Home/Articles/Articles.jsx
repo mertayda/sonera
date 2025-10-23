@@ -30,10 +30,10 @@ const Articles = () => {
                 <h2 className='article-title'>Home Cleaning Tips</h2>
                 
             </div>
-            <div className='row '>
+            <div className='row'>
                {data.map((item,index) => {
                    return(
-                     <div key={index}  className='col-3 mb-3'> 
+                     <div key={index}  className='col-12 col-md-6 col-lg-3 mb-3'> 
                             <div className='article-card'>
                                   <img src={item.image} alt=""  className='img-fluid'/>
                         <div className='article-card-body'>

@@ -79,3 +79,14 @@
 
 
 
+
+/* Landscape phones and large tablets */
+@media (max-width: 768px) {
+  .carousel-indicators {
+    bottom: 5% !important;
+  }
+
+  
+ 
+}
+

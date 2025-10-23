@@ -68,8 +68,8 @@ const Offers = () => {
                         </div>
 
                         <div className="row offer-price mt-auto">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <button className="btn btn-success">
+                          <div className="d-flex flex-md-row flex-column justify-content-between">
+                            <button className="btn btn-success align-self-start">
                               Purchase Now
                             </button>
                             <div className="fs-2 price-tag">
@@ -114,13 +114,14 @@ const Offers = () => {
                         </div>
 
                         <div className="row offer-price mt-auto">
-                          <div className="d-flex justify-content-between  align-items-center">
-                            <button className="btn btn-primary">
-                              Purchase Now
-                            </button>
+                          <div className="d-flex flex-column flex-md-row align-items-end  justify-content-between">
                             <div className="fs-2">
                               {item2.price} / <span>{item2.period}</span>
                             </div>
+                            <button className="btn btn-primary ">
+                              Purchase Now
+                            </button>
+                            
                           </div>
                         </div>
                       </div>

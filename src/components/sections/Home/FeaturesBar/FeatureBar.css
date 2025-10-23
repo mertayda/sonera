@@ -1,0 +1,125 @@
+/* Feature Section */
+.feature-section {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  width: 100%;
+  transform: translateY(-20%);
+  z-index: 9999;
+  background-color: white;
+  min-height: 200px;
+
+  transition: transform 0.3s ease;
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+  .feature-section {
+    transform: translateY(0);
+  }
+}
+
+/* Feature Card */
+.feature-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 1.8rem;
+  border: none;
+  color: #000; 
+  height: 100%;
+  border-right: 1px solid #E6EAEF;
+
+  transition: all 0.3s ease;
+}
+
+
+.feature-card:last-child {
+  border: none;
+}
+
+
+@media (max-width: 768px) {
+  .feature-card {
+    border: none;
+  }
+}
+
+
+.feature-card h5 {
+  font-size: 1rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 600; 
+}
+
+.feature-card p {
+  font-size: 0.9375rem; 
+  font-weight: 300;
+  margin: 0 0 1rem 0;
+  line-height: 1.6;
+}
+
+
+.feature-card-big {
+  flex: 2;
+  width: 100%;
+  position: relative;
+  padding: 1.8rem;
+  border: none;
+  color: #fff;
+  background: linear-gradient(rgba(85, 138, 189, 0.7), rgba(114, 175, 199, 0.7)),
+    url("../../../../public/images/reservation.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  transition: all 0.3s ease;
+}
+
+
+.feature-card-big h5 {
+  color: #fff !important;
+  font-weight: bold !important;
+  margin: 0 0 0.5rem 0; 
+}
+
+.feature-card-big p {
+  font-weight: normal !important;
+  margin: 0 0 1rem 0; 
+  line-height: 1.6; 
+}
+
+/* Link styling */
+.feature-card a,
+.feature-card-big a {
+  margin-top: auto;
+  align-self: flex-start;
+  text-decoration: none; 
+  color: inherit;
+  font-weight: 500; 
+  padding: 0.5rem 1rem;
+  border-radius: 4px; 
+  transition: all 0.3s ease; 
+}
+
+/* Hover effects */
+.feature-card a:hover,
+.feature-card-big a:hover {
+  opacity: 0.8;
+  transform: translateY(-2px); 
+}
+
+/* Focus styles for accessibility */
+.feature-card a:focus,
+.feature-card-big a:focus {
+  outline: 2px solid #000; 
+  outline-offset: 2px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .feature-card,
+  .feature-card-big {
+    padding: 1.2rem; 
+  }
+}

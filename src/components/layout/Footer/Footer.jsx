@@ -7,7 +7,7 @@ const Footer = () => {
     <footer>  
         <div className='container'>
             <div className='row'>
-                <div className='col-3'>
+                <div className='col-12 col-md-6  col-lg-3'>
                     <div className='footer-widget'>
                     <div className='footer-widget-title'>
                         <h3>
@@ -17,13 +17,13 @@ const Footer = () => {
                     <div className='footer-widget-content'>
                         <p>If you have any questions or need help, feel free to contact with our team.</p>
                         <ul>
-                            <li className='phone'> <a href=""> <Phone/>+5555555</a> </li>
-                            <li className='address'><a href>2307 Beverley Rd Brooklyn, New York 11226 United States.</a></li>
+                            <li className='phone'> <a href="#"> <Phone/>+5555555</a> </li>
+                            <li className='address'><a href="#">2307 Beverley Rd Brooklyn, New York 11226 United States.</a></li>
                         </ul>
                     </div>
                     </div>
                 </div>
-                <div className='col-2'>
+                <div className='col-12 col-md-6  col-lg-2'>
                     <div className='footer-widget'>
                             <div className='footer-widget-title'>
                         <h3>
@@ -45,7 +45,7 @@ const Footer = () => {
                     </div>
                     </div>
                 </div>
-                     <div className='col-2'>
+                     <div className='col-12 col-md-6 col-lg-2'>
                     <div className='footer-widget'>
                             <div className='footer-widget-title'>
                         <h3>
@@ -70,7 +70,7 @@ const Footer = () => {
                     </div>
                     </div>
                 </div>
-                        <div className='col-2'>
+                        <div className='col-12 col-md-6   col-lg-2'>
                     <div className='footer-widget'>
                             <div className='footer-widget-title'>
                         <h3>
@@ -95,7 +95,7 @@ const Footer = () => {
                     </div>
                     </div>
                 </div>
-                <div className='col-3'>
+                <div className='col-12 col-md-6  col-lg-3'>
                     <div className='widget-content'>
                         <a href=""> Request An Estimate</a>
                         <ul>
