@@ -1,61 +1,68 @@
-/* İsteğe bağlı: scroll bar zıplamasını azaltır */
-html { scrollbar-gutter: stable; }
-
-/* KAPSAYICI */
 .accordion-first {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #cdd6e0;
-  border-radius: 10px;
-  padding: 25px 25px 18px 30px;
-  margin: 20px 10px 5px 5px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
-  transition: box-shadow .3s ease;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #cdd6e0;
+    border-radius: 10px;
+    padding: 25px 25px 18px 30px;
+    margin: 20px 10px 5px 5px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease;
 }
-.accordion-first:hover { box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
 
-/* BUTON */
+.accordion-first:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
 .accordion-btn {
-  background: none;
-  border: none;
-  color: #2165B5;
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0;
+    background: none;
+    border: none;
+    color: #2165B5;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    position: relative;
 }
-.accordion-btn::after {
-  content: "▼";
-  font-size: 14px;
-  transition: transform .3s ease;
-}
-.accordion-btn.active::after { transform: rotate(180deg); }
 
-/* PANEL */
+.accordion-btn::after {
+    content: "▼";
+    font-size: 14px;
+    transition: transform 0.3s ease;
+    margin-left: 10px;
+}
+
+.accordion-btn.active::after {
+    transform: rotate(180deg);
+}
+
 .panel {
-  overflow: hidden;                 /* içerik taşmasın */
-  max-height: 0;                    /* kapalı başlangıç */
-  opacity: 0;
-  transition:
-    max-height .35s ease,           /* sadece gerekenleri animasyonla */
-    opacity .25s ease;
-  will-change: max-height, opacity; /* pürüzsüzlük */
+   
+    opacity: 0;
+     transition: all 0.6s ease;
+     max-height: 0;
+     overflow: hidden;
+
 }
-.panel.active {
-  /* max-height JS ile ayarlanıyor (scrollHeight) */
-  opacity: 1;
-  /* padding’i sabit tut; layout şokunu azaltır */
-  padding: 10px 0 0 0;
-}
+
+.panel.active{
+    
+    padding: 10px;
+      opacity: 1;
+       
+} 
+
+
+
 
 .panel p{
-  padding: 7px 0 5px 0;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 24px;
-  color: #3f6ea3;
+     padding: 7px 0 5px 0px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #9ab2cd;
 }
+

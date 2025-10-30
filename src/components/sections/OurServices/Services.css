@@ -229,3 +229,60 @@
  background: #1D65B9;
  border-radius: 30px;
 }
+
+
+/*WhyUs section*/
+
+.whyUs-container{
+  overflow-x: hidden;
+}
+
+
+.whyUs{
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  user-select: none;
+  padding: 0 15px; /* Kenarlardaki gap'i dengele */
+  margin: 0 -15px; /* Dış container'la uyum */
+  transition: all 0.3s ease-in-out;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+ -webkit-user-select: none;
+  scroll-snap-type: x mandatory;
+  will-change: scroll-position;
+
+
+}
+
+.whyUs.dragging{
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+
+.whyUs.active{
+  scroll-snap-type: none;
+  scroll-behavior: auto;
+}
+
+
+.whyUs::-webkit-scrollbar {
+  display: none;
+}
+
+
+.whyUs-Card{
+  flex: 0 0 calc(33.333% - 20px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: #EEF3FA;
+  padding: 0.65rem 1.3rem;
+  min-width: 0;
+   box-sizing: border-box;
+     scroll-snap-align: start;
+ 
+}

@@ -1,45 +1,71 @@
 import React, { useRef, useState } from 'react'
 import "./Accordion.css"
 
- 
 
 const Accordion = () => {
 
+  
+  const accordionData = [
+    {
+      id: "acc-btn-1",
+      title: "Which Plan Is Right For Me?",
+      content: "With any financial product that you buy, it is important that you know you are getting the best advice from a reputable company as often you will have to provide sensitive information online or over the phone."
+    },
+    {
+      id: "acc-btn-2",
+      title: "How Do I Get Started?",
+      content: "Getting started is easy. Simply sign up and follow the instructions to set up your account."
+    },
+    {
+      id: "acc-btn-3",
+      title: "What Are The Benefits?",
+      content: "Our services offer a range of benefits including 24/7 support, competitive rates, and a user-friendly interface."
+    }
+  ];
+
+
+
+
+
+
  const [mode,setMode] = useState(false)
 const panelButton = useRef(null)
-const panel = useRef(null)
+const panel = useRef([])
+
 
 const handleClick = () => {
-  const x = panel.current
-   let twist = !mode
-   setMode(!mode)
-   
-    twist ? x.style.maxHeight = `${x.scrollHeight}px` : x.style.maxHeight = "0px"
- 
+  
 
-
+    
 }
 
   return (
-     <div className='accordion' >
-        <div className='accordion-first' >
-                <button
-          id="acc-btn-1"
+     <div className='accordion' >  
+      {accordionData.map((item,index) => {
+         return (
+           
+              <div className='accordion-first' key={index} ref={panel} >
+            <button
+          id={item.id}
           type="button"
           onClick={handleClick}
-          className={`accordion-btn ${open ? "active" : ""}`}
-          aria-expanded={open}
-          aria-controls="acc-panel-1"
+          className={`accordion-btn ${mode ? "active" : ""}`}
+          aria-expanded={mode}
+          aria-controls="acc-panel"
         >
-          Which Plan Is Right For Me?
+            {item.title}
         </button>
-            <div ref={panel} className={`panel ${!mode ? "active" : ""}`}>
+            <div  id='acc-panel' className={`panel ${mode ? "active" : ""}`}>
                 <p>
-                    With any financial product that you buy, it is important that you know you are getting the best advice from a reputable company as often you will have to provide sensitive information online or o
+                  {item.content}
                 </p>
             </div>
                
         </div>
+         )
+      }) }
+
+   
 
      </div>
   )

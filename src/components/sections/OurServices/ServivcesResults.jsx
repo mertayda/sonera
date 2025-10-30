@@ -1,7 +1,8 @@
-import React from "react";
-import { CircleStar, BadgeCheck, MoveRight } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { CircleStar, BadgeCheck, MoveRight, Wheat } from "lucide-react";
 import { Pie, PieChart, Cell } from "recharts";
 import Accordion from "../../accordion/Accordion";
+import { Clock, Sparkles, Zap } from "lucide-react";
 
 const data = [
   { name: "Design", value: 400 },
@@ -10,9 +11,103 @@ const data = [
   { name: "Operations", value: 100 },
 ];
 
+const cleaningBenefits = [
+  {
+    icon: Clock,
+    title: "Clean 25% Faster, Spotlessly",
+    text: "Profess Grade Disinfectant Profess Grade Disinfectant Profess Grade Disinfectant Profess Grade Disinfectant",
+  },
+  {
+    icon: Sparkles,
+    title: "Hospital-Grade Clean, Less Effort",
+    text: "Achieve a pristine, germ-free space in less time using our professional-strength disinfectant trusted by healthcare facilities nationwide.",
+  },
+  {
+    icon: Zap,
+    title: "Power Clean in 20% Less Time",
+    text: "Deliver a flawless, hygienic finish faster with our premium disinfectant engineered for speed and unmatched cleanliness.",
+  },
+];
+
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 const ServivcesResults = () => {
+  const [drag, setDrag] = useState(false);
+  const [auto, setAuto] = useState(true);
+  const whyUsCards = useRef(0);
+  const whyUs = useRef(null);
+  const pageLeft = useRef(0);
+  const scrollSlide = useRef(0);
+
+  const firstClone = cleaningBenefits.slice(-2).reverse();
+  const lastClone = cleaningBenefits.slice(0, 2);
+
+  const allClean = [...firstClone, ...cleaningBenefits, ...lastClone];
+
+  useEffect(() => {
+    if (!whyUs.current || !auto) return;
+    const firstChildWith = whyUs.current.children[0]?.offsetWidth;
+
+    const tick = setInterval(() => {
+      const maxScroll = whyUs.current.scrollWidth - whyUs.current.offsetWidth;
+      if (Math.ceil(whyUs.current.scrollLeft) >= maxScroll - 1) {
+        whyUs.current?.classList.add("active");
+
+        whyUs.current.scrollLeft = 0;
+        requestAnimationFrame(() => {
+          whyUs.current?.classList.remove("active");
+        });
+      } else {
+        whyUs.current.scrollLeft += firstChildWith;
+      }
+    }, 3000);
+
+    return () => clearInterval(tick);
+  }, [auto]);
+
+  const infiniteSlide = () => {
+    if (!whyUs.current || !drag) return;
+    const chWidth = whyUs.current?.offsetWidth;
+
+    if (whyUs.current.scrollLeft <= 1) {
+      whyUs.current.classList.add("active");
+      whyUs.current.scrollLeft = whyUs.current.scrollWidth - 2 * chWidth;
+      requestAnimationFrame(() => whyUs.current.classList.remove("active"));
+    } else if (
+      Math.ceil(whyUs.current.scrollLeft) >=
+      whyUs.current.scrollWidth - chWidth - 1
+    ) {
+      whyUs.current.classList.add("active");
+      whyUs.current.scrollLeft = 0;
+      requestAnimationFrame(() => whyUs.current.classList.remove("active"));
+    }
+  };
+
+  const pointerDown = (e) => {
+    e.preventDefault();
+    setAuto(false);
+    setDrag(true);
+    pageLeft.current = e.pageX;
+    whyUs.current.classList.add("dragging");
+    scrollSlide.current = whyUs.current.scrollLeft;
+  };
+
+  const pointerMove = (e) => {
+    if (!drag) return;
+    whyUs.current.scrollLeft =
+      scrollSlide.current - (e.pageX - pageLeft.current);
+  };
+
+  const pointerUp = () => {
+    setDrag(false);
+    setAuto(true);
+    requestAnimationFrame(() => whyUs.current.classList.remove("active"));
+  };
+
+  const pointerLeave = () => {
+    if (drag) pointerUp();
+  };
+
   return (
     <section className="servicesResults">
       <div className="container">
@@ -152,19 +247,31 @@ const ServivcesResults = () => {
             <div className="row mt-3">
               <h3>Stats and Charts</h3>
               <div className="col-12 col-md-6">
-                 <div className="row">
-                    <div className="col">
-                      <p>
-                        When an employee or patient tests COVID positive, you should temporarily shut your doors. Our team can help you quickly open up again as our network of local businesses ensures fast response times and excellent care from a team that is equipped with the advanced tools and technology in adherence to CDC guidelines to get your facility safely open again
-                      </p>
-                      <p>
-                        Switching from after-hours to a daytime cleaning program can reduce your cleaning costs as well as energy expenses. Since no cleaning staff is required on-site after hours, there's no need for running lights or building heating/cooling, and your doors stay locked at the end of the day.
-                      </p>
-                      <p>
-                        To keep your business running uninterrupted, we offer cost effective daytime janitorial cleaning services.
-                      </p>
-                    </div>
-                 </div>
+                <div className="row">
+                  <div className="col">
+                    <p>
+                      When an employee or patient tests COVID positive, you
+                      should temporarily shut your doors. Our team can help you
+                      quickly open up again as our network of local businesses
+                      ensures fast response times and excellent care from a team
+                      that is equipped with the advanced tools and technology in
+                      adherence to CDC guidelines to get your facility safely
+                      open again
+                    </p>
+                    <p>
+                      Switching from after-hours to a daytime cleaning program
+                      can reduce your cleaning costs as well as energy expenses.
+                      Since no cleaning staff is required on-site after hours,
+                      there's no need for running lights or building
+                      heating/cooling, and your doors stay locked at the end of
+                      the day.
+                    </p>
+                    <p>
+                      To keep your business running uninterrupted, we offer cost
+                      effective daytime janitorial cleaning services.
+                    </p>
+                  </div>
+                </div>
               </div>
               <div className="col-12 col-md-6">
                 <PieChart
@@ -210,27 +317,56 @@ const ServivcesResults = () => {
               </div>
             </div>
             <div className="row">
-                  <div className="col">
-                    <h2>how it works?!</h2>
-                      <p>
-                        We know each business facility is unique. That's why we offer a wide range of cleaning services and plans with scheduling and timing options that suit a variety of businesses. No matter how ordinary or exceptional the task, from carpet cleaning to air duct cleaning and other specialty services.
-                      </p>
-
-                  </div>
-            </div>
-            <div className="row">
               <div className="col">
-                  <h3>why us!</h3>
-                  <p>
-                    Keep your business open, safely. A primary driver of workplace contamination is the fact that people can spread germs long before showing any symptoms. Routine cleaning and disinfecting are the only way to keep your environment safe from unexpected outbreaks or hygiene risks.
-                  </p>
+                <h2>how it works?!</h2>
+                <p>
+                  We know each business facility is unique. That's why we offer
+                  a wide range of cleaning services and plans with scheduling
+                  and timing options that suit a variety of businesses. No
+                  matter how ordinary or exceptional the task, from carpet
+                  cleaning to air duct cleaning and other specialty services.
+                </p>
               </div>
             </div>
             <div className="row">
-               <div className="col">
+              <div className="col">
+                <h3>why us!</h3>
+                <p>
+                  Keep your business open, safely. A primary driver of workplace
+                  contamination is the fact that people can spread germs long
+                  before showing any symptoms. Routine cleaning and disinfecting
+                  are the only way to keep your environment safe from unexpected
+                  outbreaks or hygiene risks.
+                </p>
+              </div>
+            </div>
+            <div className="row overflow-hidden">
+              <div
+                className="whyUs"
+                ref={whyUs}
+                onScroll={infiniteSlide}
+                onPointerDown={pointerDown}
+                onPointerMove={pointerMove}
+                onPointerUp={pointerUp}
+                onPointerLeave={pointerLeave}
+              >
+                {allClean.map((item, index) => {
+                  let Icon = item.icon;
+                  return (
+                    <div className=" whyUs-Card " ref={whyUsCards} key={index}>
+                      <h5>{item.title}</h5>
+                      <p>{item.text}</p>
+                      <Icon></Icon>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="row">
+              <div className="col">
                 <h3>Key Benefits</h3>
                 <Accordion></Accordion>
-               </div>
+              </div>
             </div>
           </div>
         </div>
