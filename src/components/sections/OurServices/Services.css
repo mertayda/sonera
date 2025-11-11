@@ -7,6 +7,8 @@
 .ourServices-content{
     display: flex;
     flex-direction: column;
+   
+   
 
 }
 
@@ -18,8 +20,8 @@
 
 .ourServices-info{
     display: flex;
-    gap: 5px;
-    align-items: center;
+    gap: 20px;
+ 
 }
 
 
@@ -35,6 +37,10 @@
 .serviceOffers {
   padding: 5rem 1rem;
   background-color: #f8f9fa;
+}
+
+.serviceOffers p {
+   color: #8e949e !important;
 }
 
 .serviceOffer-Container {
@@ -62,11 +68,16 @@
   color: #063464;
 }
 
-.serviceOffer-Container:hover .serviceOffer-Card-icon,
+.serviceOffer-Container:hover,
 .serviceOffer-Container:hover h4,
-.serviceOffer-Container:hover p {
-  color: white;
+.serviceOffer-Container:hover p,
+.serviceOffer-Container:hover .serviceOffer-Card-icon > .icon
+{
+  color: white !important;
 }
+
+
+
 
 .serviceOffer-Container::before {
   content: "";
@@ -130,6 +141,80 @@
   transform: translateY(-2px);
 }
 
+
+.hot-offer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  background: linear-gradient(135deg, #9BC152, #7FAE42);
+  color: #fff;
+  padding: 3rem;
+  gap: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hot-offer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s ease-out;
+  z-index: -1;
+}
+
+.hot-offer:hover::before {
+  transform: scaleX(1);
+}
+
+.hot-offer h5 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+}
+
+.hot-offer p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.hot-offer span {
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.4px;
+  opacity: 0.9;
+}
+
+.hot-offer .btn {
+  align-self: start;
+  background: #fff;
+  color: #9BC152;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem 1.5rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.hot-offer .btn:hover {
+  background: #103b6a;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(16, 59, 106, 0.3);
+}
+
+
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .serviceOffers {
@@ -153,7 +238,26 @@
   padding: 5rem 1rem;
 }
 
+.servicesResults p{
+    color: #8e949e !important;
+}
 
+
+.servicesResults h3 {
+  font-size: 24px;
+    line-height: 1;
+    font-weight: 700;
+    margin-top: 21px;
+    margin-bottom: 21px;
+    color: #05213f;
+    text-transform: capitalize;
+}
+
+.servicesResults p{
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 28px;
+}
 
 .commercialResults{
     background: #266ABA;
@@ -191,38 +295,65 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+    border-radius: 10px;
 }
+
+
+
 
 .commercial-list li{
     display: flex;
+    position: relative;
     background: white;
-    padding: 1rem;
+    padding: 1.3rem;
     margin-bottom: 10px;
     border-radius: 5px;
     color: #063464;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
+    z-index: 0;
+    overflow: hidden;
    
 
 }
 
+.commercial-list li:hover{
+  color: white;
+}
+
+.commercial-list li::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #2165B5;
+  height: 100%;
+  width: 100%;
+   transform: scaleX(0);
+     transition: transform 0.6s ease-out;
+     z-index: -1;
+
+
+}
+
+.commercial-list li:hover::before{
+  transform: scaleX(1);
+
+}
+
 .commercial-title{
-  font-weight: 800;
-  font-size: 2rem;
+  font-weight: 800 !important;
+  font-size: 2rem !important;
 }
 
 .commercial-text{
-  font-weight: 300;
+  font-weight: 400;
   font-size: 17px;
     line-height: 27px;
     margin-bottom: 25px;
     color: #8e949e;
 }
 
-.commercial-provide-serivices{
- 
-
-}
 
 .commercial-badge{
  color: white;
@@ -276,13 +407,70 @@
   flex: 0 0 calc(33.333% - 20px);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  text-align: center;
   align-items: center;
   gap: 20px;
   background-color: #EEF3FA;
-  padding: 0.65rem 1.3rem;
+  padding: 2rem;
   min-width: 0;
    box-sizing: border-box;
      scroll-snap-align: start;
+     border-radius: 15px;
  
 }
+
+
+ .whyUs-Card  h5{
+  color: #1e4873;
+ }
+
+
+ .whyUs-Icon{
+  color: #1e4873 !important;
+ }
+
+/* ServicesSectors */
+
+.sectors {
+  width: 200px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0 auto;
+  padding: 1rem;
+  background: #fff;
+  color: #2165B5;
+  border: 2px solid #b2c4d9;
+  border-radius: 50%;
+  font-weight: bold;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+
+
+    
+
+.sectors:hover {
+  transform: translateY(-3px);
+  border-color: #2165B5;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.15), 0 0 0 6px rgba(33, 101, 181, 0.15) inset;
+}
+
+.sectors .counter {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sectors h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  text-align: center;
+}
+
+

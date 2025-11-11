@@ -1,0 +1,108 @@
+.priceMods{
+    padding: 5rem 1rem;
+}
+
+
+.price-card-container{
+  position: relative;
+  border-radius: 20px; 
+}
+
+/* Üstteki renk şeridi */
+.price-card-container::after{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);  
+  height: 6px;
+  width: min(90%, 340px);        
+  background: #1D65B9;
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* Kart */
+.price-card {
+  background: #fff;
+  padding: 1.5rem;
+  box-shadow: 0px 12px 60px rgba(6, 52, 100, 0.12);
+  border: 0;
+  border-radius: 20px;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.price-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0px 16px 72px rgba(6, 52, 100, 0.16);
+}
+
+/* Başlık & açıklama */
+.priceCard-title{
+  font-weight: 800;
+  font-size: 1.125rem; 
+  margin-bottom: .75rem;
+  color: #0e2b4e;
+}
+
+.priceCard-text{
+  font-weight: 400;
+  color: #8e949e;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+
+.price-list{
+  color: #69707c;
+  font-weight: 600;
+  gap: .5rem;
+  margin: 0 0 1.25rem 0;
+  padding: 0;
+}
+
+.price-list-item{
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .35rem 0;
+  border-bottom: 1px dashed rgba(29,101,185,0.12);
+}
+
+.price-list-item:last-child{
+  border-bottom: none;
+}
+
+.price-icon{
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: #1D65B9;
+}
+
+.price-list-text{
+  flex: 1 1 auto;
+}
+
+
+.price-info{
+  font-size: 2.25rem;  
+  line-height: 1;
+  font-weight: 800;
+  color: #1D65B9;
+  letter-spacing: .5px;
+}
+
+.price-date{
+  font-size: .75rem;
+  font-weight: 800;
+  color: #1D65B9;
+  opacity: .9;
+  transform: translateY(3px);
+}
+
+
+@media (max-width: 576px){
+  .price-card { padding: 1.25rem; }
+  .price-info{ font-size: 2rem; }
+}

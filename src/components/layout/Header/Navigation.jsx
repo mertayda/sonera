@@ -76,8 +76,8 @@ export const Navigation = () => {
            </li>
 
             <li className="nav-item">
-              <NavLink className="nav-link" to="/pricing">
-                Pricing
+              <NavLink className="nav-link" to="/price">
+                Price
               </NavLink>
             </li>
             <li className="nav-item">

@@ -15,15 +15,26 @@ const HeroServices = () => {
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         minHeight: "600px",
+        position:"relative"
       }}
     >
-      <div className="container">
+      <div style={{
+        position:"absolute",
+           top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.3)",
+      zIndex: 1,
+
+      }}></div>
+      <div className="container" style={{zIndex:2}}>
         <div className="row">
           <div className="col-12 col-md-7">
             <div className="ourServices-content">
               <div className="ourServices-title">
-                <h1>Custom Cleaning Plans For A Clean Environment</h1>
-                <p>
+                <h1 >Custom Cleaning Plans For A Clean Environment</h1>
+                <p className='fs-5 fw-lighter'>
                   Our cleaning experts deliver the highest quality of clean you
                   can always count, let us help you with all of your cleaning
                   and disinfecting responsibilities now.
@@ -33,10 +44,10 @@ const HeroServices = () => {
                 <button className="btn btn-primary">
                   Request And Estimate
                 </button>
-                <ul className="d-inline-flex list-unstyled">
-                  <li> <ShieldCheck size={45}/></li>
-                  <li>  <Bubbles size={45}/></li>
-                  <li> <HeartHandshake size={45}/>  </li>
+                <ul className="d-inline-flex list-unstyled gap-2">
+                  <li> <ShieldCheck size={50}/></li>
+                  <li>  <Bubbles size={50}/></li>
+                  <li> <HeartHandshake size={50}/>  </li>
                 </ul>
               </div>
             </div>

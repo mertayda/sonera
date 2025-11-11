@@ -3,6 +3,8 @@ import { CircleStar, BadgeCheck, MoveRight, Wheat } from "lucide-react";
 import { Pie, PieChart, Cell } from "recharts";
 import Accordion from "../../accordion/Accordion";
 import { Clock, Sparkles, Zap } from "lucide-react";
+import ServicesSectors from "./ServicesSectors";
+import image from "../../../../public/images/slide1.jpg";
 
 const data = [
   { name: "Design", value: 400 },
@@ -30,6 +32,35 @@ const cleaningBenefits = [
 ];
 
 const colors = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+
+const categories = [
+  "Commercial Disinfection",
+  "Commercial Cleaning",
+  "Project Based Cleaning",
+  "Disinfection Cleaning",
+  "Industrial Deep Cleaning"
+]
+
+
+  const accordionData = [
+    {
+      id: "acc-btn-1",
+      title: "Which Plan Is Right For Me?",
+      content: "With any financial product that you buy, it is important that you know you are getting the best advice from a reputable company as often you will have to provide sensitive information online or over the phone."
+    },
+    {
+      id: "acc-btn-2",
+      title: "How Do I Get Started?",
+      content: "Getting started is easy. Simply sign up and follow the instructions to set up your account."
+    },
+    {
+      id: "acc-btn-3",
+      title: "What Are The Benefits?",
+      content: "Our services offer a range of benefits including 24/7 support, competitive rates, and a user-friendly interface."
+    }
+  ];
+
+
 
 const ServivcesResults = () => {
   const [drag, setDrag] = useState(false);
@@ -112,58 +143,45 @@ const ServivcesResults = () => {
     <section className="servicesResults">
       <div className="container">
         <div className="row">
-          <div className="col-12 col-md-3">
+          <div className="col-12 col-md-4">
             <div className="row">
               <div className="col">
                 <div className="commercial-container">
                   <div className="commercial-body">
                     <h3>services we offer</h3>
-                    <ul className="  commercial-list  list-unstyled">
-                      <li className="">
-                        Commercial Disinfection
-                        <span>
-                          <MoveRight></MoveRight>
-                        </span>
+                    <ul className="commercial-list  list-unstyled ">
+                      {categories.map((category,i) => {
+                          return (
+                                  <li key={i} className="d-flex justify-content-between gap-3 w-100">
+                                  {category}  <span className=""><MoveRight size={20}></MoveRight></span> 
+                      
                       </li>
-                      <li className="">
-                        Commercial Disinfection
-                        <span>
-                          <MoveRight></MoveRight>
-                        </span>
-                      </li>
-                      <li className="">
-                        Commercial Disinfection
-                        <span>
-                          <MoveRight></MoveRight>
-                        </span>
-                      </li>
-                      <li className="">
-                        Commercial Disinfection
-                        <span>
-                          <MoveRight></MoveRight>
-                        </span>
-                      </li>
-                      <li className="">
-                        Commercial Disinfection
-                        <span>
-                          <MoveRight></MoveRight>
-                        </span>
-                      </li>
-                      <li className="">
-                        Commercial Disinfection
-                        <span>
-                          <MoveRight></MoveRight>
-                        </span>
-                      </li>
-                    </ul>
+                          )
+                      })}
+                     </ul>
                   </div>
                 </div>
               </div>
+           
+            </div>
+            <div className="row mt-3">
+              <div className="col">
+             
+                 <div className="hot-offer">
+                    
+                  <h5>Cleaning Excellence!</h5>
+                   <p>Expanded Disinfection Services Fits All needs!</p>
+                   <span>The processes and systems we put in place provide high quality service with a focus on safety.</span>
+                <button className="btn btn-info">Explore Our Offers</button>
+                  <span>01061245741</span>     
+                     </div>
+             </div>
             </div>
           </div>
-          <div className="col-12 col-md-9">
-            <div>
-              <h3>Overview</h3>
+          <div className="col-12 col-md-8">
+            <div className="row ">
+                <h3>Overview</h3>
+               
               <p>
                 With more than 35 years getting to know every kind of client,
                 from homeowners to facility & property managers to healthcare
@@ -181,63 +199,56 @@ const ServivcesResults = () => {
                 the disinfection know-how to customize a cleaning plan for your
                 needs.
               </p>
+            
             </div>
-            <div className="commercialResults">
+            <div className="commercialResults shadow-sm">
               <div className="commercialResults-body">
                 <div className="row justify-content-center rounded-1 p-5">
-                  <div className="col-3">
+                  <div className="col-12 col-md-3">
                     {" "}
                     <CircleStar className="icon-color" size={100} />{" "}
                   </div>
-                  <div className="col-12 col-md-7">
+                  <div className="col-12 col-md-9">
                     <h3 className="commercial-title">Commercial</h3>
-                    <p className="commercial-text">
+                    <p className="commercial-text text-muted">
                       Providing commercial cleaning services which will help you
                       protect your customers and employees, we care about clean
                       and it shows in our work, our people, and also in our
                       commitment to delivering on our word, every day.
                     </p>
-                    <ul className="row list-unstyled commercial-provide-serivices">
-                      <li className="col-12 col-md-6 mb-2">
-                        {" "}
-                        <BadgeCheck className="commercial-badge" />
-                        <span>Office Buildings</span>
-                      </li>
-                      <li className="col-12 col-md-6 mb-2">
-                        {" "}
-                        <BadgeCheck className="commercial-badge" />
-                        <span>Office Buildings</span>
-                      </li>
-                      <li className="col-12 col-md-6 mb-2">
-                        {" "}
-                        <BadgeCheck className="commercial-badge" />
-                        <span>Office Buildings</span>
-                      </li>
-                      <li className="col-12 col-md-6 mb-2">
-                        {" "}
-                        <BadgeCheck className="commercial-badge" />
-                        <span>Office Buildings</span>
-                      </li>
-                      <li className="col-12 col-md-6 mb-2">
-                        {" "}
-                        <BadgeCheck className="commercial-badge" />
-                        <span>Office Buildings</span>
-                      </li>
-                      <li className="col-12 col-md-6 mb-2">
-                        {" "}
-                        <BadgeCheck className="commercial-badge" />
-                        <span>Office Buildings</span>
-                      </li>
-
-                      <li className="col-12 col-md-6">
-                        {" "}
-                        <BadgeCheck className="commercial-badge" />
-                        <span>Office Buildings</span>
-                      </li>
-                    </ul>
+                        <ul className="row list-unstyled commercial-provide-serivices">
+  <li className="col-12 col-md-6 mb-2">
+    <BadgeCheck className="commercial-badge" />
+    <span className="ms-2 fw-light fs-6">Office Buildings</span>
+  </li>
+  <li className="col-12 col-md-6 mb-2">
+    <BadgeCheck className="commercial-badge" />
+    <span className="ms-2 fw-light fs-6">Manufacturing Facilities</span>
+  </li>
+  <li className="col-12 col-md-6 mb-2">
+    <BadgeCheck className="commercial-badge" />
+    <span className="ms-2 fw-light fs-6">Educational Facilities</span>
+  </li>
+  <li className="col-12 col-md-6 mb-2">
+    <BadgeCheck className="commercial-badge" />
+    <span className="ms-2 fw-light fs-6">Medical Facilities</span>
+  </li>
+  <li className="col-12 col-md-6 mb-2">
+    <BadgeCheck className="commercial-badge" />
+    <span className="ms-2 fw-light fs-6">Government Buildings</span>
+  </li>
+  <li className="col-12 col-md-6 mb-2">
+    <BadgeCheck className="commercial-badge" />
+    <span className="ms-2 fw-light fs-6">Financial Institutions</span>
+  </li>
+  <li className="col-12 col-md-6">
+    <BadgeCheck className="commercial-badge" />
+    <span className="ms-2 fw-light fs-6">Religious Buildings</span>
+  </li>
+</ul>
                     <div>
                       <button className="btn btn-success">Purchase Now</button>
-                      <span>650$/</span> <span>Mo</span>
+                      <span className="ms-2 fs-1">650$/</span> <span>Mo</span>
                     </div>
                   </div>
                 </div>
@@ -318,8 +329,13 @@ const ServivcesResults = () => {
             </div>
             <div className="row">
               <div className="col">
-                <h2>how it works?!</h2>
-                <p>
+                <h3>How it works?!</h3>
+                <img
+                  src={image}
+                  alt="how-it-works"
+                  className="img-fluid rounded-3 shadow-sm"
+                />
+                <p className="mt-3">
                   We know each business facility is unique. That's why we offer
                   a wide range of cleaning services and plans with scheduling
                   and timing options that suit a variety of businesses. No
@@ -356,7 +372,7 @@ const ServivcesResults = () => {
                     <div className=" whyUs-Card " ref={whyUsCards} key={index}>
                       <h5>{item.title}</h5>
                       <p>{item.text}</p>
-                      <Icon></Icon>
+                      <Icon size={30} className="whyUs-Icon"></Icon>
                     </div>
                   );
                 })}
@@ -365,7 +381,13 @@ const ServivcesResults = () => {
             <div className="row">
               <div className="col">
                 <h3>Key Benefits</h3>
-                <Accordion></Accordion>
+                <Accordion data={accordionData}></Accordion>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col">
+                <h3>Industry We Serve</h3>
+                <ServicesSectors></ServicesSectors>
               </div>
             </div>
           </div>

@@ -7,6 +7,7 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import OurServices from './pages/Services/OurServices';
+import Prices  from './pages/Prices/Prices';
 
 
 
@@ -29,7 +30,7 @@ function App() {
           <Route path='/' element={<HomePage />} />
           <Route path='/home' element={<HomePage />} />
            <Route path='/services' element= {<OurServices/>}></Route>
-        
+          <Route path='/price' element={<Prices/>}></Route>
         </Routes>
       </ErrorBoundary>
       <Footer />

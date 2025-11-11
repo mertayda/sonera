@@ -67,12 +67,13 @@ const Industry = () => {
 
 
 
-  const mouseDown = (e) => {-
+  const mouseDown = (e) => {
     e.preventDefault()
     setTop(true);
     wholeRef.current.classList.add("auto")
     pageLeftX.current = e.pageX;
     scrollGoLeft.current = wholeRef.current.scrollLeft;
+      
   };
 
   const mouseMove = (e) => {
@@ -83,7 +84,7 @@ const Industry = () => {
 
   const mouseUp = () => {
     setTop(false);
-    wholeRef.current.classList.add("remove")
+    wholeRef.current.classList.remove("auto")
   };
 
   const touchStart = (e) => {
@@ -101,7 +102,7 @@ const Industry = () => {
 
   const touchEnd = () => {
     setTop(false)
-    wholeRef.current.classList.add("remove")
+    wholeRef.current.classList.remove("auto")
   };
 
 

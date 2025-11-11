@@ -89,8 +89,8 @@ const ServicesOffers = () => {
       <div className='container'>
         <div className='row justify-content-center'>
           <div className='col-12 col-lg-8 text-center mb-5'>
-            <p className='text-primary fw-light'>Cleaning Plans That Meet Your Needs</p>
-            <h2 className='display-5 fw-bold'>
+            <p className='fst-italic fs-5' style={{color:"#8DE0FE",letterSpacing:"2px"}}>Cleaning Plans That Meet Your Needs</p>
+            <h2 className='fs-1'>
               Disinfection Services That Fit Your Premises
             </h2>
           </div>
@@ -104,7 +104,7 @@ const ServicesOffers = () => {
                 <div className='serviceOffer-Container h-100'>
                   <div className='serviceOffer-Card h-100'>
                     <div className='serviceOffer-Card-icon mb-4'>
-                      <Icon size={60} className='text-primary'/>
+                      <Icon size={60} className='icon text-primary'/>
                     </div>
                     
                     <div className='serviceOffer-Card-body flex-grow-1'>
