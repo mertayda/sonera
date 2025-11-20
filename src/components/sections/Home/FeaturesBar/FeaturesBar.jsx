@@ -39,8 +39,8 @@ const FeaturesBar = () => {
   return (
     <section className="features">
       <div className="container">
-        <div className="feature-section">
-          <div className="row flex-column flex-md-row  align-items-stretch h-100">
+        <div className="feature-section rounded-3">
+          <div className="row flex-column flex-md-row  align-items-stretch h-100 rounded-3">
             {features.map((item,index) => {
                 const TruereserVation = Boolean(item.reservation)
                  return (

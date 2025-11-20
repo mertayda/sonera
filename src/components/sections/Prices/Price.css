@@ -1,23 +1,28 @@
-.priceMods{
-    padding: 5rem 1rem;
+/* =======================================
+   PRICE SECTION
+======================================= */
+
+.priceMods {
+  padding: 5rem 1rem;
+  background: #f5f8fc;
 }
 
-
-.price-card-container{
+.price-card-container {
   position: relative;
-  border-radius: 20px; 
+  border-radius: 20px;
+  overflow: hidden;
 }
 
-/* Üstteki renk şeridi */
-.price-card-container::after{
+/* Üstteki accent bar */
+.price-card-container::after {
   content: "";
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translateX(-50%);  
+  transform: translateX(-50%);
   height: 6px;
-  width: min(90%, 340px);        
-  background: #1D65B9;
+  width: min(90%, 340px);
+  background:  #9bcb3b;
   border-radius: 6px;
   pointer-events: none;
 }
@@ -25,84 +30,348 @@
 /* Kart */
 .price-card {
   background: #fff;
-  padding: 1.5rem;
-  box-shadow: 0px 12px 60px rgba(6, 52, 100, 0.12);
-  border: 0;
+  padding: 1.75rem;
+  box-shadow: 0 18px 60px rgba(6, 52, 100, 0.12);
   border-radius: 20px;
-  transition: transform .2s ease, box-shadow .2s ease;
+  border: 1px solid rgba(6, 52, 100, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.price-card:hover{
-  transform: translateY(-2px);
-  box-shadow: 0px 16px 72px rgba(6, 52, 100, 0.16);
+.price-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 80px rgba(6, 52, 100, 0.18);
+  border-color: rgba(29, 101, 185, 0.25);
 }
 
 /* Başlık & açıklama */
-.priceCard-title{
+.priceCard-title {
   font-weight: 800;
-  font-size: 1.125rem; 
-  margin-bottom: .75rem;
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
   color: #0e2b4e;
 }
 
-.priceCard-text{
+.priceCard-text {
   font-weight: 400;
   color: #8e949e;
-  margin-bottom: 1.25rem;
-  line-height: 1.5;
+  margin-bottom: 1.4rem;
+  line-height: 1.6;
 }
 
-
-.price-list{
+/* Özellik listesi */
+.price-list {
   color: #69707c;
   font-weight: 600;
-  gap: .5rem;
-  margin: 0 0 1.25rem 0;
+  gap: 0.5rem;
+  margin: 0 0 1.5rem 0;
   padding: 0;
 }
 
-.price-list-item{
-  display: inline-flex;
+.price-list-item {
+  display: flex;
   align-items: center;
-  gap: .5rem;
-  padding: .35rem 0;
-  border-bottom: 1px dashed rgba(29,101,185,0.12);
+  gap: 0.5rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px dashed rgba(29, 101, 185, 0.12);
 }
 
-.price-list-item:last-child{
+.price-list-item:last-child {
   border-bottom: none;
 }
 
-.price-icon{
+.price-icon {
   flex: 0 0 auto;
   width: 20px;
   height: 20px;
-  color: #1D65B9;
+  color: #1d65b9;
 }
 
-.price-list-text{
+.price-list-text {
   flex: 1 1 auto;
 }
 
-
-.price-info{
-  font-size: 2.25rem;  
+/* Fiyat kısmı */
+.price-info {
+  font-size: 2.25rem;
   line-height: 1;
   font-weight: 800;
-  color: #1D65B9;
-  letter-spacing: .5px;
+  color: #1d65b9;
+  letter-spacing: 0.5px;
 }
 
-.price-date{
-  font-size: .75rem;
+.price-date {
+  font-size: 0.75rem;
   font-weight: 800;
-  color: #1D65B9;
-  opacity: .9;
+  color: #1d65b9;
+  opacity: 0.9;
   transform: translateY(3px);
 }
 
+/* Responsive */
+@media (max-width: 576px) {
+  .price-card {
+    padding: 1.25rem;
+  }
 
-@media (max-width: 576px){
-  .price-card { padding: 1.25rem; }
-  .price-info{ font-size: 2rem; }
+  .price-info {
+    font-size: 2rem;
+  }
+}
+
+/* =======================================
+   SATISFY SECTION (Testimonials)
+======================================= */
+
+.Satisfy {
+  padding: 3rem 1rem;
+  background: #f5f8fc;
+}
+
+.satisfy-title {
+  font-weight: 600;
+  font-size: 28px;
+  font-style: italic;
+  line-height: 1.2;
+  color: #032b56;
+  text-transform: capitalize;
+  margin-bottom: 18px;
+  letter-spacing: 0.03em;
+}
+
+.satisfiy-text {
+  scroll-behavior: smooth;
+  user-select: none;
+  will-change: transform;
+  cursor: grab;
+  font-style: italic;
+}
+
+.satisfiy-text.active {
+  scroll-behavior: auto;
+  transition: none;
+  cursor: grabbing;
+}
+
+.satisfy-text-content {
+  pointer-events: none;
+  color: #1e4873;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* Avatarlar */
+.thumb-img,
+.thumb-img2 {
+  display: inline-block;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  padding: 3px;
+  transition:
+    border-color 0.25s ease-in,
+    transform 0.18s ease-out,
+    box-shadow 0.18s ease-out;
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 4px 10px rgba(3, 43, 86, 0.12);
+}
+
+.thumb-img.active,
+.thumb-img2.active {
+  border-color: #9bcb3b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(155, 203, 59, 0.35);
+}
+
+.thumb-img img,
+.thumb-img2 img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: block;
+}
+
+.thumb-img:hover,
+.thumb-img2:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(3, 43, 86, 0.2);
+}
+
+/* Responsive dokunuşlar */
+@media (max-width: 992px) {
+  .satisfy-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+
+  .satisfy-text-content {
+    font-size: 14px;
+  }
+
+  .thumb-img,
+  .thumb-img2 {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 576px) {
+  .satisfy-title {
+    font-size: 22px;
+  }
+
+  .satisfy-text-content {
+    font-size: 13px;
+  }
+
+  .thumb-img,
+  .thumb-img2 {
+    width: 46px;
+    height: 46px;
+  }
+}
+
+/* =======================================
+   FREQUENT QUESTIONS SECTION
+======================================= */
+
+.frequent {
+  padding: 5rem 1rem;
+  background: linear-gradient(135deg, #1d65b9 0%, #15477f 100%);
+  color: #fff;
+}
+
+/* =======================================
+   SENDFORM (Request An Estimate)
+======================================= */
+
+.sendform {
+  padding: 5rem 1rem;
+  background: #c7e87b;
+}
+
+.sendform .container {
+  max-width: 1120px;
+}
+
+/* Başlık & açıklama */
+.sendform .form-title {
+  color: #032b56;
+  font-weight: 700;
+}
+
+.sendform .form-text {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #6b7481;
+  margin-bottom: 28px;
+}
+
+/* Label & input stilleri sadece sendform içi */
+.sendform .form-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #032b56;
+  margin-bottom: 0.4rem;
+}
+
+.sendform .form-control,
+.sendform .form-select {
+  font-weight: 400;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #4b5563;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  padding: 0.65rem 0.9rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease,
+    transform 0.1s ease;
+  background-color: #ffffff;
+}
+
+.sendform .form-control:focus,
+.sendform .form-select:focus {
+  border-color: #1d65b9;
+  box-shadow: 0 0 0 0.18rem rgba(29, 101, 185, 0.15);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.sendform .form-control::placeholder {
+  color: #a1a7b3;
+}
+
+/* Radio group */
+.sendform .form-check-input {
+  cursor: pointer;
+}
+
+.sendform .form-check-input:checked {
+  background-color: #1d65b9;
+  border-color: #1d65b9;
+}
+
+.sendform .form-check-label {
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+/* Hata mesajları */
+.sendform .text-danger.small {
+  font-size: 0.8rem;
+}
+
+
+
+/* Sağ taraftaki info-card */
+.info-card {
+  border-left: 5px solid #28a745;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 18px 60px rgba(6, 52, 100, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 80px rgba(6, 52, 100, 0.18);
+}
+
+.info-card h4 {
+  font-size: 1.25rem;
+  color: #032b56;
+}
+
+.info-card p {
+  font-size: 0.95rem;
+  color: #6b7481;
+  line-height: 1.6;
+}
+
+/* Info listesinde ikon & text hizası */
+.info-card ul li {
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+
+
+
+/* Responsive form layout */
+@media (max-width: 992px) {
+  .sendform {
+    padding: 3.5rem 1rem;
+  }
+
+  .sendform .col-12.col-lg-7 {
+    margin-bottom: 2rem;
+  }
 }

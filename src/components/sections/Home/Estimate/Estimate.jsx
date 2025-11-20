@@ -183,7 +183,7 @@ const Estimate = () => {
             </p>
             <form onSubmit={handleSubmit} className="d-flex flex-column gap-4">
               <div className="row">
-                <div className="col-12 col-md-6">
+                <div className="col-12 col-lg-6">
                   <label htmlFor="service-select" className="form-label">
                     Choose your service
                   </label>
@@ -202,7 +202,7 @@ const Estimate = () => {
                   {anotherError && <p className="error">{anotherError} </p>}
                 </div>
 
-                <div className="col-12 col-md-6">
+                <div className="col-12 col-lg-6">
                   <label htmlFor="example-select" className="form-label">
                     Indicate type of cleaning
                   </label>
@@ -257,7 +257,7 @@ const Estimate = () => {
                 </div>
               </div>
               <div className="row">
-                <div className="col-12 col-md-8 col-lg-4">
+                <div className="col-12  col-lg-4">
                   <label htmlFor="room" className="form-label">
                     Room(s)?
                   </label>
@@ -271,7 +271,7 @@ const Estimate = () => {
                   />
                   {error && <p className="error">{error}</p>}
                 </div>
-                <div className="col-12 col-md-8 col-lg-4">
+                <div className="col-12  col-lg-4">
                   <label htmlFor="hallway" className="form-label">
                     Hallway(s)??
                   </label>
@@ -285,7 +285,7 @@ const Estimate = () => {
                   />
                   {error && <p className="error">{error}</p>}
                 </div>
-                <div className="col-12 col-md-8 col-lg-4">
+                <div className="col-12  col-lg-4">
                   <label htmlFor="staircase" className="form-label">
                     Staircase(s)?
                   </label>

@@ -146,73 +146,65 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: flex-start;
   background: linear-gradient(135deg, #9BC152, #7FAE42);
   color: #fff;
-  padding: 3rem;
-  gap: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  padding: 3.5rem;
+  gap: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(127, 174, 66, 0.3);
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  height: 100%;
 }
 
+/* Glass shine effect */
 .hot-offer::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.1);
-  transform: scaleX(0);
-  transform-origin: left;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
   transition: transform 0.6s ease-out;
   z-index: -1;
 }
 
 .hot-offer:hover::before {
-  transform: scaleX(1);
+  transform: translateX(100%);
 }
 
 .hot-offer h5 {
-  font-size: 2.2rem;
-  font-weight: 600;
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: 800;
   font-style: italic;
   line-height: 1.1;
-  letter-spacing: 0.5px;
 }
 
 .hot-offer p {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin: 0;
-  line-height: 1.6;
-}
-
-.hot-offer span {
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.4px;
-  opacity: 0.9;
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.95;
 }
 
 .hot-offer .btn {
-  align-self: start;
   background: #fff;
-  color: #9BC152;
-  font-weight: 700;
+  color: #7FAE42;
+  font-weight: 800;
   border: none;
-  border-radius: 6px;
-  padding: 0.8rem 1.5rem;
-  transition: all 0.3s ease-in-out;
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .hot-offer .btn:hover {
-  background: #103b6a;
+  background: var(--primary-blue);
   color: #fff;
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(16, 59, 106, 0.3);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
-
 
 
 /* Responsive adjustments */
