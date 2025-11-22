@@ -29,11 +29,11 @@ const HeroPrice = () => {
         <div className="row">
           <div className="col-12 col-md-7">
          
-            
-                <p className='price-text'>Plans Meets Your Needs</p>
-                <h1 className='price-title'>
+                   <h1 className='price-title'>
                     our pricing
                 </h1>
+                <p className='price-text fs-5 fw-lighter'>Plans Meets Your Needs</p>
+               
              
            
         

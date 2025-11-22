@@ -32,36 +32,17 @@ export const Navigation = () => {
               </NavLink>
             </li>
 
-            <li className="nav-item dropdown">
+            <li className="nav-item">
               <NavLink
-                className="nav-link dropdown-toggle"
-                to="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+                className="nav-link"
+                to="/company"
+               
+              
+             
               >
-                Company
-              </NavLink>
-              <ul className="dropdown-menu">
-                <li className="dropdown-link">
-                  <Link className="dropdown-item" to="/about">
                     About Us
-                  </Link>
-                </li>
-                <li className="dropdown-link">
-                  <Link className="dropdown-item" to="/how-it-works">
-                    How it works
-                  </Link>
-                </li>
-                <li className="dropdown-link">
-                  <Link className="dropdown-item" to="/career">
-                    Career
-                  </Link>
-                </li>
-                <li className="dropdown-link">
-                  <hr className="dropdown-divider" />
-                </li>
-              </ul>
+              </NavLink>
+         
             </li>
 
             <li className="nav-item">
@@ -80,11 +61,7 @@ export const Navigation = () => {
                 Price
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" to="/blog">
-                Blog
-              </NavLink>
-            </li>
+           
             <li className="nav-item">
               <NavLink className="nav-link" to="/contact">
                 Contact

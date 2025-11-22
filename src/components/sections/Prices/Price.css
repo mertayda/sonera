@@ -1,6 +1,15 @@
-/* =======================================
-   PRICE SECTION
-======================================= */
+
+:root {
+  --primary-color: #1d65b9;
+  --primary-hover: #165092;
+  --text-dark: #032b56;
+  --text-gray: #6b7481;
+  --bg-gradient: radial-gradient(circle at top left, #e0ecff 0, #f9fafb 40%, #f3f4f6 100%);
+  --input-border: rgba(15, 23, 42, 0.15);
+  --success-green: #28a745;
+}
+
+
 
 .priceMods {
   padding: 5rem 1rem;
@@ -13,7 +22,12 @@
   overflow: hidden;
 }
 
-/* Üstteki accent bar */
+.price-title{
+  font-size: 4rem;
+  text-transform: capitalize;
+}
+
+
 .price-card-container::after {
   content: "";
   position: absolute;
@@ -27,7 +41,6 @@
   pointer-events: none;
 }
 
-/* Kart */
 .price-card {
   background: #fff;
   padding: 1.75rem;
@@ -43,7 +56,7 @@
   border-color: rgba(29, 101, 185, 0.25);
 }
 
-/* Başlık & açıklama */
+
 .priceCard-title {
   font-weight: 800;
   font-size: 1.2rem;
@@ -58,7 +71,6 @@
   line-height: 1.6;
 }
 
-/* Özellik listesi */
 .price-list {
   color: #69707c;
   font-weight: 600;
@@ -90,7 +102,6 @@
   flex: 1 1 auto;
 }
 
-/* Fiyat kısmı */
 .price-info {
   font-size: 2.25rem;
   line-height: 1;
@@ -107,7 +118,6 @@
   transform: translateY(3px);
 }
 
-/* Responsive */
 @media (max-width: 576px) {
   .price-card {
     padding: 1.25rem;
@@ -118,9 +128,6 @@
   }
 }
 
-/* =======================================
-   SATISFY SECTION (Testimonials)
-======================================= */
 
 .Satisfy {
   padding: 3rem 1rem;
@@ -128,18 +135,14 @@
 }
 
 .satisfy-title {
-  font-weight: 600;
-  font-size: 28px;
+  font-weight: 700;
+  font-size: 30px;
   font-style: italic;
-  line-height: 1.2;
   color: #032b56;
-  text-transform: capitalize;
-  margin-bottom: 18px;
-  letter-spacing: 0.03em;
+  margin-bottom: 22px;
 }
 
 .satisfiy-text {
-  scroll-behavior: smooth;
   user-select: none;
   will-change: transform;
   cursor: grab;
@@ -147,31 +150,24 @@
 }
 
 .satisfiy-text.active {
-  scroll-behavior: auto;
-  transition: none;
   cursor: grabbing;
 }
 
 .satisfy-text-content {
-  pointer-events: none;
   color: #1e4873;
-  font-size: 15px;
-  font-weight: 400;
-  line-height: 1.6;
-  margin-bottom: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+  padding-right: 20px;
 }
 
-/* Avatarlar */
 .thumb-img,
 .thumb-img2 {
   display: inline-block;
   border: 3px solid transparent;
   border-radius: 50%;
   padding: 3px;
-  transition:
-    border-color 0.25s ease-in,
-    transform 0.18s ease-out,
-    box-shadow 0.18s ease-out;
+  transition: all 0.25s ease-in-out;
   width: 56px;
   height: 56px;
   box-shadow: 0 4px 10px rgba(3, 43, 86, 0.12);
@@ -180,17 +176,16 @@
 .thumb-img.active,
 .thumb-img2.active {
   border-color: #9bcb3b;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(155, 203, 59, 0.35);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 22px rgba(155, 203, 59, 0.35);
 }
 
 .thumb-img img,
 .thumb-img2 img {
-  object-fit: cover;
   width: 100%;
   height: 100%;
+  object-fit: cover;
   border-radius: 50%;
-  display: block;
 }
 
 .thumb-img:hover,
@@ -199,44 +194,9 @@
   box-shadow: 0 6px 16px rgba(3, 43, 86, 0.2);
 }
 
-/* Responsive dokunuşlar */
-@media (max-width: 992px) {
-  .satisfy-title {
-    font-size: 24px;
-    text-align: center;
-    margin-bottom: 14px;
-  }
 
-  .satisfy-text-content {
-    font-size: 14px;
-  }
 
-  .thumb-img,
-  .thumb-img2 {
-    width: 50px;
-    height: 50px;
-  }
-}
 
-@media (max-width: 576px) {
-  .satisfy-title {
-    font-size: 22px;
-  }
-
-  .satisfy-text-content {
-    font-size: 13px;
-  }
-
-  .thumb-img,
-  .thumb-img2 {
-    width: 46px;
-    height: 46px;
-  }
-}
-
-/* =======================================
-   FREQUENT QUESTIONS SECTION
-======================================= */
 
 .frequent {
   padding: 5rem 1rem;
@@ -244,38 +204,53 @@
   color: #fff;
 }
 
-/* =======================================
-   SENDFORM (Request An Estimate)
-======================================= */
+
+
+
 
 .sendform {
   padding: 5rem 1rem;
-  background: #c7e87b;
+  background: var(--bg-gradient);
+  min-height: 100vh;
 }
 
 .sendform .container {
   max-width: 1120px;
 }
 
-/* Başlık & açıklama */
+/* --- TYPOGRAPHY --- */
+
 .sendform .form-title {
-  color: #032b56;
-  font-weight: 700;
+  color: var(--text-dark);
+  font-weight: 800;
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .sendform .form-text {
   font-weight: 400;
-  font-size: 15px;
+  font-size: 0.95rem;
   line-height: 1.6;
-  color: #6b7481;
-  margin-bottom: 28px;
+  color: var(--text-gray);
+  margin-bottom: 2rem;
 }
 
-/* Label & input stilleri sadece sendform içi */
+
+
+.estimate-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+
+
 .sendform .form-label {
   font-weight: 600;
   font-size: 0.9rem;
-  color: #032b56;
+  color: var(--text-dark);
   margin-bottom: 0.4rem;
 }
 
@@ -283,95 +258,152 @@
 .sendform .form-select {
   font-weight: 400;
   font-size: 0.95rem;
-  line-height: 1.5;
-  color: #4b5563;
-  border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.12);
-  padding: 0.65rem 0.9rem;
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease,
-    background-color 0.15s ease,
-    transform 0.1s ease;
-  background-color: #ffffff;
+  color: #374151;
+  border-radius: 8px;
+  border: 1px solid var(--input-border);
+  padding: 0.75rem 1rem;
+  background-color: #fff;
+  transition: all 0.2s ease-in-out;
 }
 
 .sendform .form-control:focus,
 .sendform .form-select:focus {
-  border-color: #1d65b9;
-  box-shadow: 0 0 0 0.18rem rgba(29, 101, 185, 0.15);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(29, 101, 185, 0.1);
   outline: none;
-  transform: translateY(-1px);
+}
+
+.sendform .form-control.is-invalid,
+.sendform .form-select.is-invalid {
+  border-color: #dc3545;
+  background-image: none; 
+}
+
+.sendform .invalid-feedback {
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  color: #dc3545;
 }
 
 .sendform .form-control::placeholder {
-  color: #a1a7b3;
+  color: #adb5bd;
 }
 
-/* Radio group */
+
+
 .sendform .form-check-input {
   cursor: pointer;
+  width: 1.1em;
+  height: 1.1em;
+  margin-top: 0.2em;
 }
 
 .sendform .form-check-input:checked {
-  background-color: #1d65b9;
-  border-color: #1d65b9;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
 
 .sendform .form-check-label {
-  font-size: 0.9rem;
+  cursor: pointer;
+  font-size: 0.95rem;
   color: #374151;
-}
-
-/* Hata mesajları */
-.sendform .text-danger.small {
-  font-size: 0.8rem;
+  font-weight: 500;
 }
 
 
 
-/* Sağ taraftaki info-card */
+.sendform .submit-btn {
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px 0 rgba(29, 101, 185, 0.39);
+}
+
+.sendform .submit-btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(29, 101, 185, 0.23);
+}
+
+.sendform .submit-btn:active {
+  transform: translateY(0);
+}
+
+
+
 .info-card {
-  border-left: 5px solid #28a745;
   background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 18px 60px rgba(6, 52, 100, 0.12);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-left: 5px solid var(--success-green);
+  border-radius: 12px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
 }
 
 .info-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 24px 80px rgba(6, 52, 100, 0.18);
+  transform: translateY(-5px);
 }
 
 .info-card h4 {
-  font-size: 1.25rem;
-  color: #032b56;
+  color: var(--text-dark);
+  font-size: 1.4rem;
 }
 
 .info-card p {
+  color: var(--text-gray);
   font-size: 0.95rem;
-  color: #6b7481;
   line-height: 1.6;
+  margin-bottom: 0;
 }
 
-/* Info listesinde ikon & text hizası */
 .info-card ul li {
   font-size: 0.95rem;
-  color: #374151;
+  color: #4b5563;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+
+.info-card .btn-success {
+  background-color: var(--success-green);
+  border: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.info-card .btn-success:hover {
+  background-color: #218838;
 }
 
 
 
-
-/* Responsive form layout */
 @media (max-width: 992px) {
   .sendform {
-    padding: 3.5rem 1rem;
+    padding: 3rem 1rem;
   }
-
+  
   .sendform .col-12.col-lg-7 {
     margin-bottom: 2rem;
+  }
+
+  .info-card {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .estimate-card {
+    padding: 1.5rem;
+  }
+  
+  .sendform .form-title {
+    font-size: 1.5rem;
   }
 }

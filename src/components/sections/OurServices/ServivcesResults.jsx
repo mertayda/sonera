@@ -38,29 +38,28 @@ const categories = [
   "Commercial Cleaning",
   "Project Based Cleaning",
   "Disinfection Cleaning",
-  "Industrial Deep Cleaning"
-]
+  "Industrial Deep Cleaning",
+];
 
+const sectorChartData = categories.map((name, index) => ({
+  name,
+  value: (index + 1) * 100, // test değer, istersen değişiriz
+}));
 
-  const accordionData = [
-    {
-      id: "acc-btn-1",
-      title: "Which Plan Is Right For Me?",
-      content: "With any financial product that you buy, it is important that you know you are getting the best advice from a reputable company as often you will have to provide sensitive information online or over the phone."
-    },
-    {
-      id: "acc-btn-2",
-      title: "How Do I Get Started?",
-      content: "Getting started is easy. Simply sign up and follow the instructions to set up your account."
-    },
-    {
-      id: "acc-btn-3",
-      title: "What Are The Benefits?",
-      content: "Our services offer a range of benefits including 24/7 support, competitive rates, and a user-friendly interface."
-    }
-  ];
-
-
+const accordionData = [
+  {
+    title: "Which Plan Is Right For Me?",
+    p: "With any financial product that you buy, it is important that you know you are getting the best advice from a reputable company as often you will have to provide sensitive information online or over the phone.",
+  },
+  {
+    title: "How Do I Get Started?",
+    p: "Getting started is easy. Simply sign up and follow the instructions to set up your account.",
+  },
+  {
+    title: "What Are The Benefits?",
+    p: "Our services offer a range of benefits including 24/7 support, competitive rates, and a user-friendly interface.",
+  },
+];
 
 const ServivcesResults = () => {
   const [drag, setDrag] = useState(false);
@@ -101,16 +100,16 @@ const ServivcesResults = () => {
     const chWidth = whyUs.current?.offsetWidth;
 
     if (whyUs.current.scrollLeft <= 1) {
-      whyUs.current.classList.add("active");
+      whyUs.current.classList.add("dragging");
       whyUs.current.scrollLeft = whyUs.current.scrollWidth - 2 * chWidth;
-      requestAnimationFrame(() => whyUs.current.classList.remove("active"));
+      requestAnimationFrame(() => whyUs.current.classList.remove("dragging"));
     } else if (
       Math.ceil(whyUs.current.scrollLeft) >=
       whyUs.current.scrollWidth - chWidth - 1
     ) {
-      whyUs.current.classList.add("active");
+      whyUs.current.classList.add("dragging");
       whyUs.current.scrollLeft = 0;
-      requestAnimationFrame(() => whyUs.current.classList.remove("active"));
+      requestAnimationFrame(() => whyUs.current.classList.remove("dragging"));
     }
   };
 
@@ -132,7 +131,10 @@ const ServivcesResults = () => {
   const pointerUp = () => {
     setDrag(false);
     setAuto(true);
-    requestAnimationFrame(() => whyUs.current.classList.remove("active"));
+    requestAnimationFrame(() => {
+      if (!whyUs.current) return;
+      whyUs.current.classList.remove("dragging");
+    });
   };
 
   const pointerLeave = () => {
@@ -150,38 +152,43 @@ const ServivcesResults = () => {
                   <div className="commercial-body">
                     <h3>services we offer</h3>
                     <ul className="commercial-list  list-unstyled ">
-                      {categories.map((category,i) => {
-                          return (
-                                  <li key={i} className="d-flex justify-content-between gap-3 w-100">
-                                  {category}  <span className=""><MoveRight size={20}></MoveRight></span> 
-                      
-                      </li>
-                          )
+                      {categories.map((category, i) => {
+                        return (
+                          <li
+                            key={i}
+                            className="d-flex justify-content-between gap-3 w-100"
+                          >
+                            {category}{" "}
+                            <span className="">
+                              <MoveRight size={20}></MoveRight>
+                            </span>
+                          </li>
+                        );
                       })}
-                     </ul>
+                    </ul>
                   </div>
                 </div>
               </div>
-           
             </div>
             <div className="row mt-3">
               <div className="col">
-             
-                 <div className="hot-offer">
-                    
+                <div className="hot-offer">
                   <h5>Cleaning Excellence!</h5>
-                   <p>Expanded Disinfection Services Fits All needs!</p>
-                   <span>The processes and systems we put in place provide high quality service with a focus on safety.</span>
-                <button className="btn btn-info">Explore Our Offers</button>
-                  <span>01061245741</span>     
-                     </div>
-             </div>
+                  <p>Expanded Disinfection Services Fits All needs!</p>
+                  <span>
+                    The processes and systems we put in place provide high
+                    quality service with a focus on safety.
+                  </span>
+                  <button className="btn btn-info">Explore Our Offers</button>
+                  <span>01061245741</span>
+                </div>
+              </div>
             </div>
           </div>
           <div className="col-12 col-md-8">
             <div className="row ">
-                <h3>Overview</h3>
-               
+              <h3>Overview</h3>
+
               <p>
                 With more than 35 years getting to know every kind of client,
                 from homeowners to facility & property managers to healthcare
@@ -199,7 +206,6 @@ const ServivcesResults = () => {
                 the disinfection know-how to customize a cleaning plan for your
                 needs.
               </p>
-            
             </div>
             <div className="commercialResults shadow-sm">
               <div className="commercialResults-body">
@@ -216,36 +222,50 @@ const ServivcesResults = () => {
                       and it shows in our work, our people, and also in our
                       commitment to delivering on our word, every day.
                     </p>
-                        <ul className="row list-unstyled commercial-provide-serivices">
-  <li className="col-12 col-md-6 mb-2">
-    <BadgeCheck className="commercial-badge" />
-    <span className="ms-2 fw-light fs-6">Office Buildings</span>
-  </li>
-  <li className="col-12 col-md-6 mb-2">
-    <BadgeCheck className="commercial-badge" />
-    <span className="ms-2 fw-light fs-6">Manufacturing Facilities</span>
-  </li>
-  <li className="col-12 col-md-6 mb-2">
-    <BadgeCheck className="commercial-badge" />
-    <span className="ms-2 fw-light fs-6">Educational Facilities</span>
-  </li>
-  <li className="col-12 col-md-6 mb-2">
-    <BadgeCheck className="commercial-badge" />
-    <span className="ms-2 fw-light fs-6">Medical Facilities</span>
-  </li>
-  <li className="col-12 col-md-6 mb-2">
-    <BadgeCheck className="commercial-badge" />
-    <span className="ms-2 fw-light fs-6">Government Buildings</span>
-  </li>
-  <li className="col-12 col-md-6 mb-2">
-    <BadgeCheck className="commercial-badge" />
-    <span className="ms-2 fw-light fs-6">Financial Institutions</span>
-  </li>
-  <li className="col-12 col-md-6">
-    <BadgeCheck className="commercial-badge" />
-    <span className="ms-2 fw-light fs-6">Religious Buildings</span>
-  </li>
-</ul>
+                    <ul className="row list-unstyled commercial-provide-serivices">
+                      <li className="col-12 col-md-6 mb-2">
+                        <BadgeCheck className="commercial-badge" />
+                        <span className="ms-2 fw-light fs-6">
+                          Office Buildings
+                        </span>
+                      </li>
+                      <li className="col-12 col-md-6 mb-2">
+                        <BadgeCheck className="commercial-badge" />
+                        <span className="ms-2 fw-light fs-6">
+                          Manufacturing Facilities
+                        </span>
+                      </li>
+                      <li className="col-12 col-md-6 mb-2">
+                        <BadgeCheck className="commercial-badge" />
+                        <span className="ms-2 fw-light fs-6">
+                          Educational Facilities
+                        </span>
+                      </li>
+                      <li className="col-12 col-md-6 mb-2">
+                        <BadgeCheck className="commercial-badge" />
+                        <span className="ms-2 fw-light fs-6">
+                          Medical Facilities
+                        </span>
+                      </li>
+                      <li className="col-12 col-md-6 mb-2">
+                        <BadgeCheck className="commercial-badge" />
+                        <span className="ms-2 fw-light fs-6">
+                          Government Buildings
+                        </span>
+                      </li>
+                      <li className="col-12 col-md-6 mb-2">
+                        <BadgeCheck className="commercial-badge" />
+                        <span className="ms-2 fw-light fs-6">
+                          Financial Institutions
+                        </span>
+                      </li>
+                      <li className="col-12 col-md-6">
+                        <BadgeCheck className="commercial-badge" />
+                        <span className="ms-2 fw-light fs-6">
+                          Religious Buildings
+                        </span>
+                      </li>
+                    </ul>
                     <div>
                       <button className="btn btn-success">Purchase Now</button>
                       <span className="ms-2 fs-1">650$/</span> <span>Mo</span>
@@ -257,7 +277,7 @@ const ServivcesResults = () => {
 
             <div className="row mt-3">
               <h3>Stats and Charts</h3>
-              <div className="col-12 col-md-6">
+              <div className="col-12 col-lg-5">
                 <div className="row">
                   <div className="col">
                     <p>
@@ -284,7 +304,7 @@ const ServivcesResults = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-12 col-md-6">
+              <div className="col-12 col-lg-7  d-flex flex-column align-items-center">
                 <PieChart
                   style={{
                     width: "100%",
@@ -292,39 +312,32 @@ const ServivcesResults = () => {
                     maxHeight: "70vh",
                     aspectRatio: 1,
                   }}
-                  responsive
                 >
-                  <defs>
-                    <pattern
-                      id="pattern-checkers"
-                      x="0"
-                      y="0"
-                      width="10"
-                      height="10"
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <rect
-                        className="checker"
-                        x="0"
-                        width="5"
-                        height="5"
-                        y="0"
+                  <Pie data={sectorChartData} nameKey="name">
+                    {sectorChartData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={colors[index % colors.length]}
                       />
-                      <rect
-                        className="checker"
-                        x="10"
-                        width="5"
-                        height="5"
-                        y="10"
-                      />
-                    </pattern>
-                  </defs>
-                  <Pie data={data} label>
-                    {data.map((_entry, index) => (
-                      <Cell key={`cell-${index}`} fill={colors[index]} />
                     ))}
                   </Pie>
-                </PieChart>{" "}
+                </PieChart>
+
+                {/* LEGEND */}
+                <div className="chart-legend mt-3 row">
+                  {sectorChartData.map((entry, index) => (
+                    <div key={index} className="d-flex justify-content-center align-items-center  legend-item col-12 col-md-8 col-lg-5">
+                   
+                      <span className="legend-label">{entry.name}</span>
+                         <span
+                        className="legend-color"
+                        style={{
+                          backgroundColor: colors[index % colors.length],
+                        }}
+                      ></span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
             <div className="row">

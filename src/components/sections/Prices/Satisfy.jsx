@@ -1,162 +1,190 @@
 import React, { useEffect, useRef, useState } from "react";
-import img from "../../../../public/images/Satisfy/1.png";
-import profile from "../../../../public/images/Satisfy/profile.jpg";
-import "./Price.css"
+import img from "../../../../public/images/Satisfy/1.png"; // Ensure path is correct
+import profile from "../../../../public/images/Satisfy/profile.jpg"; // Ensure path is correct
+import "./Price.css";
 
-const data = [
-  "They will be at top of my list the next time I need a housecleaning. I was extremely pleased with the service I received. It was easy efficient to set up the cleaning, the price was fair and up front, and the cleaning team did a top-notch job.",
-  "They will be at top of my list the next time I need a housecleaning. I was extremely pleased with the service I received. It was easy efficient to set up the cleaning, the price was fair and up front, and the cleaning team did a top-notch job.",
-  "They will be at top of my list the next time I need a housecleaning. I was extremely pleased with the service I received. It was easy efficient to set up the cleaning, the price was fair and up front, and the cleaning team did a top-notch job.",
+// 1. Structure data so text and author are linked
+const testimonials = [
+  {
+    id: 1,
+    text: "They will be at top of my list the next time I need a housecleaning. I was extremely pleased with the service I received. It was easy efficient to set up the cleaning.",
+    name: "John Smith",
+    company: "Eco Systems",
+    image: profile,
+  },
+  {
+    id: 2,
+    text: "The team did a top-notch job. The price was fair and up front. I highly recommend them for anyone looking for quality service.",
+    name: "Sarah Connor",
+    company: "Skynet Corp",
+    image: profile,
+  },
+  {
+    id: 3,
+    text: "Incredible attention to detail. I've used many services before but this one stands out for their professionalism.",
+    name: "Mike Ross",
+    company: "Pearson Hardman",
+    image: profile,
+  },
 ];
 
 const Satisfy = () => {
-  const sat = useRef(null);
+  const containerRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [tranfer,setTransfer] = useState(0)
-  const [xle,setXle] = useState(0)
-  
-  
-  const startX = useRef(0)
-  const slideWith = useRef(0)
-  const total = data.length
+  const [dragOffset, setDragOffset] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
 
+  const startX = useRef(0);
 
-
-
- const next = () => {
-    setCurrentIndex((p) => (p + 1) % total)
- }
-
-
- const prev = () => {
-    setCurrentIndex((p) => (p  - 1 + total) % total)
- }
-
-
-useEffect(() => {
-      const update = () => {
-           if(sat.current && sat.current.parentElement){
-                slideWith.current = sat.current.parentElement.offsetWidth;
-          setXle(-currentIndex * slideWith.current)
-        
-      }
-      }
-        update()
-      window.addEventListener("resize",update)
-
-      return () => window.removeEventListener("resize",update)
-},[])
-
-
-
+  // 2. Handle Resizing efficiently using ResizeObserver
   useEffect(() => {
-    if (!slideWith.current) return;
-    const base = -currentIndex * slideWith.current;
-    setXle(base + tranfer);
-  }, [currentIndex, tranfer]);
+    if (!containerRef.current) return;
 
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setContainerWidth(entry.contentRect.width);
+      }
+    });
 
-  
+    resizeObserver.observe(containerRef.current);
 
-const pointerDown = (e) => {
-  e.preventDefault()
-  startX.current= e.clientX 
-  setIsDragging(true)
-  setTransfer(0)
-  sat.current.classList.add("active")
+    return () => resizeObserver.disconnect();
+  }, []);
 
- 
-
-}
-
-
-
-const pointerMove = (e) => {
-  if(!isDragging) return
-  const diff = e.pageX  - startX.current
-  setTransfer(diff)
-
- 
-}
-
-const pointerUp = (e) => {
-         if(!isDragging) return
-    if(tranfer < -50 && currentIndex < total - 1){
-       setCurrentIndex((p) => p + 1)
-    } else if (tranfer > 50 &&  currentIndex > 0){
-         setCurrentIndex((p) => p - 1)
+  // Navigation Logic
+  const next = () => {
+    if (currentIndex < testimonials.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
     }
-          setTransfer(0)
-      sat.current.classList.remove("active")
-      setIsDragging(false)
+  };
+
+  const prev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex((prev) => prev - 1);
+    }
+  };
+
+  // Pointer/Drag Events
+  const onPointerDown = (e) => {
+    setIsDragging(true);
+    startX.current = e.clientX;
+    // Important: Capture pointer so drag continues even if mouse leaves div
+    e.target.setPointerCapture(e.pointerId);
+  };
+
+  const onPointerMove = (e) => {
+    if (!isDragging) return;
+    const currentX = e.clientX;
+    const diff = currentX - startX.current;
+    setDragOffset(diff);
+  };
+
+  const onPointerUp = (e) => {
+    if (!isDragging) return;
+    setIsDragging(false);
     
-}
+    const threshold = 50; // Drag distance required to swap
+    
+    if (dragOffset < -threshold && currentIndex < testimonials.length - 1) {
+      next();
+    } else if (dragOffset > threshold && currentIndex > 0) {
+      prev();
+    }
+    
+    // Reset drag offset to animate back to center
+    setDragOffset(0);
+    e.target.releasePointerCapture(e.pointerId);
+  };
 
-
-
-
+  // Calculate current transform position
+  const currentTranslate = -(currentIndex * containerWidth) + dragOffset;
 
   return (
-    <section className="Satisfy">
-               <div className="container">
-      <div className="row justify-content-between align-items-center">
-        <div className="col-5">
-          <img  src={img} className="img-fluid" alt="satisfied-client" />
-        </div>
-        <div className="col-7" onPointerDown={pointerDown} onPointerMove={pointerMove} onPointerUp={pointerUp} onPointerLeave={pointerUp}>
-          <h3 className="satisfy-title">Satisfied Users Over The Globe</h3>
-          <div className="overflow-hidden mb-4">
-            <div
-              ref={sat}
-              className="satisfiy-text d-flex "
-              style={{ transform: `translateX(${xle}px)`,
-                transition: isDragging ? "none" : "transform 0.3s ease" }}
-            >
-              {data.map((item, i) => {
-                return (
-                  <p
-                    className="satisfy-text-content"
-                    style={{ flex: "0 0 100%" }}
-                    key={i}
-                  >
-                    {item}
-                  </p>
-                );
-              })}
-            </div>
+    <section className="Satisfy py-5">
+      <div className="container">
+        <div className="row justify-content-between align-items-center">
+          
+          {/* Image Column - Stack on mobile (order-2), Left on Desktop (order-lg-1) */}
+          <div className="col-12 col-lg-5 mb-4 mb-lg-0 order-2 order-lg-1">
+            <img src={img} className="img-fluid rounded" alt="Satisfied Client" />
           </div>
-          <div className="d-flex justify-content-between gap-2">
-            <div className="d-flex">
-              <div className="d-flex flex-row gap-2 ">
-                <div  className={`thumb-img ${currentIndex >= 2 && "active " }`}>
-                  <img src={profile} alt="profile"   />
-                </div>
-                <div className="d-flex flex-column">
-                  <span>John Smith</span>
-                  <span>Eco Systems</span>
-                </div>
-              </div>
-              <div className="d-flex gap-2">
-                <div className={`thumb-img2 ${currentIndex <= 0 && "active"}`}>
-                  <img src={profile} alt="profile" />
-                </div>
-                <div className="d-flex flex-column">
-                  <span>John Smith</span>
-                  <span>Eco Systems</span>
-                </div>
+
+          {/* Text Column */}
+          <div className="col-12 col-lg-7 order-1 order-lg-2">
+            <h3 className="satisfy-title mb-4">Satisfied Users Over The Globe</h3>
+
+            {/* Slider Window */}
+            <div 
+              className="slider-window overflow-hidden mb-4" 
+              ref={containerRef}
+              // Pan-y allows vertical scrolling on mobile while dragging horizontally
+              style={{ touchAction: "pan-y", cursor: isDragging ? "grabbing" : "grab" }}
+              onPointerDown={onPointerDown}
+              onPointerMove={onPointerMove}
+              onPointerUp={onPointerUp}
+              onPointerLeave={onPointerUp} // Handle mouse leaving element
+            >
+              <div
+                className="slider-track d-flex"
+                style={{
+                  transform: `translateX(${currentTranslate}px)`,
+                  transition: isDragging ? "none" : "transform 0.3s ease-out",
+                }}
+              >
+                {testimonials.map((item) => (
+                  <div
+                    className="slider-item"
+                    style={{ minWidth: "100%" }}
+                    key={item.id}
+                  >
+                    <p className="satisfy-text-content lead">{item.text}</p>
+                  </div>
+                ))}
               </div>
             </div>
-            <div className="d-inline-flex gap-2">
-              <button className="btn btn-success align-self-start"  onClick={() => prev()}>Prev</button>
-              <button className="btn btn-success align-self-start" onClick={() => next()}>Next</button>
+
+            {/* Footer: Controls and Active Profile */}
+            <div className="d-flex justify-content-between align-items-center gap-3 flex-wrap">
+              
+              {/* Dynamic Profile Info */}
+              <div className="d-flex align-items-center gap-3">
+                <div className="thumb-img-wrapper">
+                  <img 
+                    src={testimonials[currentIndex].image} 
+                    alt="profile" 
+                    className="rounded-circle"
+                    style={{ width: "50px", height: "50px", objectFit: "cover" }} 
+                  />
+                </div>
+                <div className="d-flex flex-column">
+                  <span className="fw-bold">{testimonials[currentIndex].name}</span>
+                  <span className="text-muted small">{testimonials[currentIndex].company}</span>
+                </div>
+              </div>
+
+              {/* Buttons */}
+              <div className="d-inline-flex gap-2">
+                <button 
+                  className="btn btn-outline-success" 
+                  onClick={prev} 
+                  disabled={currentIndex === 0}
+                >
+                  Prev
+                </button>
+                <button 
+                  className="btn btn-success" 
+                  onClick={next}
+                  disabled={currentIndex === testimonials.length - 1}
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-       </section>
-  
+    </section>
   );
 };
 

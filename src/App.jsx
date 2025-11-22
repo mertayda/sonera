@@ -9,6 +9,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import Contact from './pages/Contact/Contact';
 import OurServices from './pages/Services/OurServices';
 import Prices  from './pages/Prices/Prices';
+import About from './pages/AboutUs/About';
 
 
 
@@ -33,7 +34,9 @@ function App() {
            <Route path='/services' element= {<OurServices/>}></Route>
           <Route path='/price' element={<Prices/>}></Route>
           <Route path='/contact' element={<Contact/>}></Route>
+          <Route path='/company'  element={<About/>}> </Route>
         </Routes>
+       
       </ErrorBoundary>
       <Footer />
     </>
