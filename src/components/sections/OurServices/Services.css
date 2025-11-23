@@ -304,6 +304,10 @@
   gap: 1rem;
 }
 
+.commercial-body h3{
+  text-transform: capitalize;
+}
+
 .icon-color {
   color: #1d65b9;
 }
