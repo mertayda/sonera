@@ -174,7 +174,7 @@ const ServivcesResults = () => {
               <div className="col">
                 <div className="hot-offer">
                   <h5>Cleaning Excellence!</h5>
-                  <p>Expanded Disinfection Services Fits All needs!</p>
+                  <span className="text-white">Expanded Disinfection Services Fits All needs!</span>
                   <span>
                     The processes and systems we put in place provide high
                     quality service with a focus on safety.
@@ -391,12 +391,7 @@ const ServivcesResults = () => {
                 })}
               </div>
             </div>
-            <div className="row">
-              <div className="col">
-                <h3>Key Benefits</h3>
-                <Accordion data={accordionData}></Accordion>
-              </div>
-            </div>
+          
             <div className="row">
               <div className="col">
                 <h3>Industry We Serve</h3>

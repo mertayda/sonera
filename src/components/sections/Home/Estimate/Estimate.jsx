@@ -1,9 +1,9 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import "./estimate.css";
 import { ChevronRight, ChevronLeft } from "lucide-react";
-import { useState } from "react";
 
 const Estimate = () => {
+  // --- Carousel Data ---
   const testimonials = [
     {
       name: "Jessica M.",
@@ -23,329 +23,327 @@ const Estimate = () => {
     },
   ];
 
-  // form
+  // --- Form State ---
   const [formData, setData] = useState({
     service: "clean",
     typeLoop: "weekly",
     facilityType: "educational",
     facilityName: "",
-    room: "",
-    hallway: "",
-    staircase: "",
-    yes: true,
+    room: 0,
+    hallway: 0,
+    staircase: 0,
+    hasSupplies: "yes", // Changed from 'yes' boolean to string for radio grouping
   });
-  const [error, setError] = useState("");
-  const [anotherError, setAnotherError] = useState("");
 
+  const [status, setStatus] = useState({ type: "", message: "" }); // Unified status (error/success)
+  const [isLoading, setIsLoading] = useState(false);
+
+  // --- Form Handlers ---
   const handleUpdate = (e) => {
-    const { name, value, type, number } = e.target;
+    const { name, value, type } = e.target;
     setData((prev) => ({
       ...prev,
-      [name]: type === number ? Number(value) : value,
+      [name]: type === "number" ? Number(value) : value,
     }));
+    // Clear errors when user types
+    if (status.message) setStatus({ type: "", message: "" });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const service = String(formData.service || "").trim();
-    const typeLoop = String(formData.typeLoop || "").trim();
-    const facilityType = String(formData.facilityType || "").trim();
-    const yes = String(formData.yes || "").trim();
+    setStatus({ type: "", message: "" });
 
-    if (!service || !typeLoop || !facilityType || !yes) {
-      setAnotherError("test");
-      return;
-    }
-    if (
-      formData.room.length < 5 ||
-      formData.hallway.length < 5 ||
-      formData.staircase < 5
-    ) {
-      setError("Please fill the forms as according to rules");
+    // Basic Validation
+    if (!formData.facilityName.trim()) {
+      setStatus({ type: "error", message: "Please enter a facility name." });
       return;
     }
 
-    sendData(formData)
-      .then(() => {
-        console.log("its send");
-      })
-      .catch((error) => {
-        console.error(error, "error");
-      });
-  };
+    // Numeric Validation (Ensure they aren't negative)
+    if (formData.room < 0 || formData.hallway < 0 || formData.staircase < 0) {
+      setStatus({ type: "error", message: "Room counts cannot be negative." });
+      return;
+    }
 
-  const sendData = async (data) => {
+    setIsLoading(true);
+
     try {
-      const sendData = await fetch(
-        "https://jsonplaceholder.typicode.com/users",
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        }
-      );
-      if (!sendData.ok) throw new Error("cant post");
-      const res = await sendData.json();
-      console.log(res, "success");
+      const response = await fetch("https://jsonplaceholder.typicode.com/users", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      });
+
+      if (!response.ok) throw new Error("Server error");
+
+      await response.json(); // Wait for parsing
+      setStatus({ type: "success", message: "Estimate request sent successfully!" });
+      
+      // Optional: Reset form
+      // setData({ ...initialState }); 
+
     } catch (error) {
-      console.error(error, "status error");
+      console.error(error);
+      setStatus({ type: "error", message: "Failed to send request. Please try again." });
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // carousel
 
   const [auto, setAuto] = useState(true);
   const [index, setIndex] = useState(0);
-  const testimonial = useRef(null);
+  const testimonialRef = useRef(null);
   const total = testimonials.length;
+  const timeoutRef = useRef(null); // 
+
+  const resetAutoScroll = useCallback(() => {
+    setAuto(false);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setAuto(true);
+    }, 4000); //
+  }, []);
 
   const goTo = () => {
-    stopt();
-    setIndex((p) => (p + 1) % total);
+    resetAutoScroll();
+    setIndex((prev) => (prev + 1) % total);
   };
 
   const backTo = () => {
-    stopt();
-    setIndex((p) => (p - 1 + total) % total);
+    resetAutoScroll();
+    setIndex((prev) => (prev - 1 + total) % total);
   };
 
   useEffect(() => {
-    testimonial.current.style.transform = `translateX(-${index * 100}%)`;
+    if (testimonialRef.current) {
+      testimonialRef.current.style.transform = `translateX(-${index * 100}%)`;
+    }
   }, [index]);
 
+
   useEffect(() => {
-    if (!auto) return;
+    let intervalId;
+    if (auto) {
+      intervalId = setInterval(() => {
+        setIndex((prev) => (prev + 1) % total);
+      }, 3000);
+    }
+    return () => clearInterval(intervalId);
+  }, [auto, total]);
 
-    let ix = setInterval(() => {
-      setIndex((p) => (p + 1) % total);
-    }, 2000);
 
-    return () => clearInterval(ix);
-  }, [auto]);
-
-  const stopt = () => {
-    setAuto(false);
-    let id = setTimeout(() => {
-      setAuto(true);
-    }, 3000);
-
-    return () => clearTimeout(id);
-  };
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   return (
     <div className="estimate">
       <div className="container">
-        <div className="row">
-          <div className="col-12 col-md-6">
-            <div className="row">
-              <div className="col">
-                <p className="text-white fst-italic">We Always Strive for Excellence</p>
-                <h2 className="text-white fs-1 w-75">Your Clients & Employees Deserve A Clean Environment!!</h2>
-                <p className="text-white w-75">
-                  We continuously invest in our processes, our employees and our
-                  relationship with every business we serve.{" "}
-                </p>
-                <div>
-                  <button className="btn btn-primary bg-button">Our products</button>
-                </div>
-                <div className="testimonial-container">
-                  <div className="d-flex testimonial" ref={testimonial}>
-                    {testimonials.map((item, index) => {
-                      return (
-                        <div key={index} className="testimonial-cards">
-                          <p className="">{item.text}</p>
-                          <span>{item.name}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
+        <div className="row gy-5">
+          
+       
+          <div className="col-12 col-lg-6 d-flex flex-column justify-content-center">
+            <div className="text-content mb-4">
+              <p className="text-white fst-italic mb-2">We Always Strive for Excellence</p>
+              <h2 className="text-white display-5 fw-bold mb-3">
+                Your Clients & Employees Deserve A Clean Environment!
+              </h2>
+              <p className="text-white opacity-75 mb-4">
+                We continuously invest in our processes, our employees, and our
+                relationship with every business we serve.
+              </p>
+              <button className="btn btn-primary bg-button px-4 py-2 rounded-pill">
+                Our products
+              </button>
+            </div>
 
-                <div className="d-flex gap-1">
-                   <button className="prev"  onClick={() => backTo()}>
-                       <ChevronLeft />
-                </button>
-                <button className="next" onClick={() => goTo()}>
-                           <ChevronRight />
-                </button> 
+            <div className="testimonial-section mt-auto">
+              <div className="testimonial-container">
+                <div className="testimonial-track" ref={testimonialRef}>
+                  {testimonials.map((item, i) => (
+                    <div key={i} className="testimonial-card">
+                      <p>"{item.text}"</p>
+                      <span>— {item.name}</span>
+                    </div>
+                  ))}
                 </div>
+              </div>
+
+              <div className="d-flex gap-2 mt-3">
+                <button className="nav-btn prev" onClick={backTo} aria-label="Previous">
+                  <ChevronLeft size={20} />
+                </button>
+                <button className="nav-btn next" onClick={goTo} aria-label="Next">
+                  <ChevronRight size={20} />
+                </button>
               </div>
             </div>
           </div>
-          <div className="col-12 col-md-6 estimate-form">
-            <h2 className="estimate-header">Request An Estimate</h2>
-            <p className="estimate-info">
-              For a cleaning that meets your highest standards, you need a
-              dedicated team of trained specialists with all supplies needed to
-              thoroughly clean your home.
-            </p>
-            <form onSubmit={handleSubmit} className="d-flex flex-column gap-4">
-              <div className="row">
-                <div className="col-12 col-lg-6">
-                  <label htmlFor="service-select" className="form-label">
-                    Choose your service
-                  </label>
-                  <select
-                    name="service"
-                    id="service-select"
-                    value={formData.service}
-                    className="form-select"
-                    aria-label="Choose your service"
-                    onChange={handleUpdate}
-                  >
-                    <option value="clean">Clean</option>
-                    <option value="clean1">Clean1</option>
-                    <option value="clean2">Clean2</option>
-                  </select>
-                  {anotherError && <p className="error">{anotherError} </p>}
-                </div>
 
-                <div className="col-12 col-lg-6">
-                  <label htmlFor="example-select" className="form-label">
-                    Indicate type of cleaning
-                  </label>
-                  <select
-                    id="example-select"
-                    name="typeLoop"
-                    value={formData.typeLoop}
-                    onChange={handleUpdate}
-                    className="form-select"
-                    aria-label="Default select example"
-                  >
-                    <option value="weekly">Weekly Regular</option>
-                    <option value="monthly">Monthly Regular</option>
-                  </select>
-                  {error && <p className="error">{error} </p>}
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-12 col-md-6">
-                  <label htmlFor="FacilityType" className="form-label">
-                    Facility type
-                  </label>
-                  <select
-                    id="facilityType"
-                    name="facilityType"
-                    value={formData.facilityType}
-                    onChange={handleUpdate}
-                    className="form-select"
-                    aria-label="Choose your service"
-                  >
-                    <option value="educational">Educational</option>
-                    <option value="govermental">Govermental</option>
-                  </select>
-                  {error && <p className="error">{error}</p>}
-                </div>
+  
+          <div className="col-12 col-lg-6">
+            <div className="estimate-form-card">
+              <h2 className="estimate-header">Request An Estimate</h2>
+              <p className="estimate-info">
+                For a cleaning that meets your highest standards, you need a
+                dedicated team of trained specialists.
+              </p>
 
-                <div className="col-12 col-md-6">
-                  <label htmlFor="Facility-name" className="form-label">
-                    Facility name
-                  </label>
-                  <input
-                    id="Facility-name"
-                    name="facilityName"
-                    value={formData.facilityName}
-                    onChange={handleUpdate}
-                    className="form-control"
-                    type="text"
-                    placeholder="test"
-                    aria-label="Facility-name"
-                  ></input>
-                  {error && <p className="error">{error}</p>}
+              {status.message && (
+                <div className={`alert ${status.type === "error" ? "alert-danger" : "alert-success"}`}>
+                  {status.message}
                 </div>
-              </div>
-              <div className="row">
-                <div className="col-12  col-lg-4">
-                  <label htmlFor="room" className="form-label">
-                    Room(s)?
-                  </label>
-                  <input
-                    type="number"
-                    name="room"
-                    value={formData.room}
-                    onChange={handleUpdate}
-                    id="room"
-                    className="form-control"
-                  />
-                  {error && <p className="error">{error}</p>}
-                </div>
-                <div className="col-12  col-lg-4">
-                  <label htmlFor="hallway" className="form-label">
-                    Hallway(s)??
-                  </label>
-                  <input
-                    type="number"
-                    id="hallway"
-                    name="hallway"
-                    value={formData.hallway}
-                    onChange={handleUpdate}
-                    className="form-control"
-                  />
-                  {error && <p className="error">{error}</p>}
-                </div>
-                <div className="col-12  col-lg-4">
-                  <label htmlFor="staircase" className="form-label">
-                    Staircase(s)?
-                  </label>
-                  <input
-                    type="number"
-                    name="staircase"
-                    value={formData.staircase}
-                    onChange={handleUpdate}
-                    id="staircase"
-                    className="form-control"
-                  />
-                  {error && <p className="error">{error}</p>}
-                </div>
-              </div>
-              <div className="row">
-                <h5 className="send-request-header">
-                  Do you have all the necessary cleaning supplies?
-                </h5>
-                <div className="col-12 col-md-4 col-lg-2">
-                  <div clasName="form-check ">
-                    <input
-                      className="form-check-input"
-                      name="yes"
-                      value={formData.yes}
-                      type="radio"
-                      id="checkChecked"
+              )}
+
+              <form onSubmit={handleSubmit} className="d-flex flex-column gap-3">
+                <div className="row g-3">
+                  <div className="col-12 col-md-6">
+                    <label htmlFor="service-select" className="form-label">Service</label>
+                    <select
+                      name="service"
+                      id="service-select"
+                      value={formData.service}
+                      className="form-select"
                       onChange={handleUpdate}
-                      required
-                    />
+                    >
+                      <option value="clean">Standard Cleaning</option>
+                      <option value="deep">Deep Cleaning</option>
+                      <option value="sanitization">Sanitization</option>
+                    </select>
+                  </div>
 
-                    <label className="form-check-label" htmlFor="checkChecked">
-                      Yes
-                    </label>
+                  <div className="col-12 col-md-6">
+                    <label htmlFor="frequency-select" className="form-label">Frequency</label>
+                    <select
+                      id="frequency-select"
+                      name="typeLoop"
+                      value={formData.typeLoop}
+                      onChange={handleUpdate}
+                      className="form-select"
+                    >
+                      <option value="weekly">Weekly Regular</option>
+                      <option value="biweekly">Bi-Weekly</option>
+                      <option value="monthly">Monthly Regular</option>
+                    </select>
                   </div>
                 </div>
-                <div className="col-12 col-md-4 col-lg-2">
-                  <div className="form-check">
-                    <input
-                      className="form-check-input"
-                      type="radio"
-                      name="yes"
-                      value={formData.yes}
-                      id="checkChecked1"
+
+                <div className="row g-3">
+                  <div className="col-12 col-md-6">
+                    <label htmlFor="facilityType" className="form-label">Facility Type</label>
+                    <select
+                      id="facilityType"
+                      name="facilityType"
+                      value={formData.facilityType}
                       onChange={handleUpdate}
-                      required
+                      className="form-select"
+                    >
+                      <option value="educational">Educational</option>
+                      <option value="government">Government</option>
+                      <option value="commercial">Commercial</option>
+                      <option value="residential">Residential</option>
+                    </select>
+                  </div>
+
+                  <div className="col-12 col-md-6">
+                    <label htmlFor="facilityName" className="form-label">Facility Name</label>
+                    <input
+                      id="facilityName"
+                      name="facilityName"
+                      value={formData.facilityName}
+                      onChange={handleUpdate}
+                      className="form-control"
+                      type="text"
+                      placeholder="e.g. Main Office"
                     />
-                    <label className="form-check-label" htmlFor="checkChecked1">
-                      No
-                    </label>
                   </div>
                 </div>
-              </div>
-              <div className="row">
-                <div className="col">
-                  <button type="submit" className="btn btn-primary bg-button">
-                    Send
+
+                <div className="row g-3">
+                  <div className="col-4">
+                    <label htmlFor="room" className="form-label">Rooms</label>
+                    <input
+                      type="number"
+                      name="room"
+                      value={formData.room}
+                      onChange={handleUpdate}
+                      id="room"
+                      min="0"
+                      className="form-control"
+                    />
+                  </div>
+                  <div className="col-4">
+                    <label htmlFor="hallway" className="form-label">Hallways</label>
+                    <input
+                      type="number"
+                      id="hallway"
+                      name="hallway"
+                      value={formData.hallway}
+                      onChange={handleUpdate}
+                      min="0"
+                      className="form-control"
+                    />
+                  </div>
+                  <div className="col-4">
+                    <label htmlFor="staircase" className="form-label">Stairs</label>
+                    <input
+                      type="number"
+                      name="staircase"
+                      value={formData.staircase}
+                      onChange={handleUpdate}
+                      id="staircase"
+                      min="0"
+                      className="form-control"
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-3">
+                  <h5 className="send-request-header">Do you have cleaning supplies?</h5>
+                  <div className="d-flex gap-4">
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="hasSupplies"
+                        value="yes"
+                        id="suppliesYes"
+                        checked={formData.hasSupplies === "yes"}
+                        onChange={handleUpdate}
+                      />
+                      <label className="form-check-label" htmlFor="suppliesYes">Yes</label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="hasSupplies"
+                        value="no"
+                        id="suppliesNo"
+                        checked={formData.hasSupplies === "no"}
+                        onChange={handleUpdate}
+                      />
+                      <label className="form-check-label" htmlFor="suppliesNo">No</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-2">
+                  <button 
+                    type="submit" 
+                    className="btn btn-primary bg-button w-100 py-2 fw-bold"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Sending..." : "Send Request"}
                   </button>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </div>

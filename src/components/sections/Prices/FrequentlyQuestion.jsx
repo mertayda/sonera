@@ -49,7 +49,7 @@ const FrequentlyQuestion = () => {
               <p className="fs-5 text-light">What are you looking for?</p>
             </div>
           </div>
-          <Accordion data={data}></Accordion>
+          <Accordion className="test" data={data}></Accordion>
         </div>
       </div>
     </section>

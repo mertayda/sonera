@@ -25,13 +25,13 @@ const SendForm = () => {
       [name]: value,
     }));
 
-    // Real-time validation: Clear error if input becomes valid
+
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: null }));
     }
   };
 
-  // Validate on Submit
+
   const validate = () => {
     const newErrors = {};
 
@@ -39,14 +39,14 @@ const SendForm = () => {
     if (!form.cleanType) newErrors.cleanType = "Cleaning type is required";
     if (!form.facility) newErrors.facility = "Facility type is required";
     
-    // Fixed logic: Check for less than 4 characters
+
     if (!form.fName || form.fName.trim().length < 4) {
       newErrors.fName = "Facility name must be at least 4 characters";
     }
 
     if (!form.supplies) newErrors.supplies = "Please specify supply availability";
 
-    // Numeric Validation
+
     if (!form.rooms) {
       newErrors.rooms = "Required";
     } else if (Number(form.rooms) < 1 || Number(form.rooms) > 5) {
@@ -74,7 +74,7 @@ const SendForm = () => {
     if (validate()) {
       console.log("FORM SUBMITTED SUCCESS:", form);
       alert("Estimate Request Sent!");
-      // Reset form here if needed
+ 
     } else {
         console.log("Validation Failed");
     }
@@ -85,7 +85,7 @@ const SendForm = () => {
       <div className="container my-5">
         <div className="row g-5 align-items-stretch">
           
-          {/* LEFT COLUMN: FORM */}
+
           <div className="col-12 col-lg-7">
             <div className="estimate-card h-100">
               <h3 className="form-title">Request An Estimate</h3>
@@ -97,7 +97,7 @@ const SendForm = () => {
               <form onSubmit={handleSubmit} noValidate>
                 <div className="row g-3">
                   
-                  {/* SERVICE */}
+    
                   <div className="col-md-6">
                     <label className="form-label" htmlFor="service">
                       Choose your service
@@ -116,7 +116,6 @@ const SendForm = () => {
                     {errors.service && <div className="invalid-feedback">{errors.service}</div>}
                   </div>
 
-                  {/* CLEAN TYPE */}
                   <div className="col-md-6">
                     <label className="form-label" htmlFor="cleanType">
                       Indicate type of cleaning
@@ -135,7 +134,7 @@ const SendForm = () => {
                     {errors.cleanType && <div className="invalid-feedback">{errors.cleanType}</div>}
                   </div>
 
-                  {/* FACILITY TYPE */}
+   
                   <div className="col-md-6">
                     <label className="form-label" htmlFor="facility">
                       Facility type
@@ -154,7 +153,7 @@ const SendForm = () => {
                     {errors.facility && <div className="invalid-feedback">{errors.facility}</div>}
                   </div>
 
-                  {/* FACILITY NAME */}
+ 
                   <div className="col-md-6">
                     <label className="form-label" htmlFor="fName">
                       Facility Name
@@ -171,7 +170,7 @@ const SendForm = () => {
                     {errors.fName && <div className="invalid-feedback">{errors.fName}</div>}
                   </div>
 
-                  {/* NUMERIC INPUTS */}
+ 
                   <div className="col-md-4">
                     <label className="form-label" htmlFor="rooms">Room(s)</label>
                     <input
@@ -211,7 +210,7 @@ const SendForm = () => {
                     {errors.staircases && <div className="invalid-feedback">{errors.staircases}</div>}
                   </div>
 
-                  {/* SUPPLIES RADIO */}
+   
                   <div className="col-12 mt-4">
                     <label className="form-label d-block mb-2">
                       Do you have all the necessary cleaning supplies?
@@ -255,7 +254,7 @@ const SendForm = () => {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: INFO CARD */}
+
           <div className="col-12 col-lg-5 d-flex align-items-center">
             <div className="info-card w-100">
               <h4 className="fw-bold mb-3">

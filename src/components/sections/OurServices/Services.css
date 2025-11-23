@@ -426,7 +426,7 @@
   padding: 2rem;
   min-width: 0;
   box-sizing: border-box;
-  scroll-snap-align: center; /* Better centering on mobile */
+  scroll-snap-align: center; 
   border-radius: 15px;
 }
 
@@ -447,7 +447,7 @@
 
 @media (max-width: 768px) {
   .whyUs-Card {
-    flex: 0 0 75%; /* Show 1 full card and a peek of the next to encourage scroll */
+    flex: 0 0 75%; 
     padding: 1.5rem;
   }
   
@@ -465,11 +465,9 @@
   }
 }
 
-/* =========================================
-   7. Sectors (Circles) & Charts
-   ========================================= */
+
 .sectors {
-  /* Responsive width: 200px usually, but shrink if screen is tiny */
+
   width: min(200px, 50vw);
   aspect-ratio: 1 / 1;
   display: flex;
@@ -477,7 +475,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin: 0 auto 20px auto; /* Added bottom margin for spacing */
+  margin: 0 auto 20px auto; 
   padding: 1rem;
   background: #fff;
   color: #2165B5;
@@ -507,15 +505,13 @@
   text-align: center;
 }
 
-/* Accordion Helper */
-.accordion-btn {
-  color: #2165B5 !important;
-}
 
-/* Chart Legends */
+
+
+
 .chart-legend {
   display: flex;
-  flex-wrap: wrap; /* Allow wrapping on mobile */
+  flex-wrap: wrap; 
   justify-content: center;
   align-items: center;
   gap: 15px;

@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
-import img from "../../../../public/images/Satisfy/1.png"; // Ensure path is correct
-import profile from "../../../../public/images/Satisfy/profile.jpg"; // Ensure path is correct
+import img from "../../../../public/images/Satisfy/1.png"; 
+import profile from "../../../../public/images/Satisfy/profile.jpg"; 
 import "./Price.css";
 
-// 1. Structure data so text and author are linked
+
 const testimonials = [
   {
     id: 1,
@@ -65,11 +65,11 @@ const Satisfy = () => {
     }
   };
 
-  // Pointer/Drag Events
+
   const onPointerDown = (e) => {
     setIsDragging(true);
     startX.current = e.clientX;
-    // Important: Capture pointer so drag continues even if mouse leaves div
+ 
     e.target.setPointerCapture(e.pointerId);
   };
 
@@ -144,10 +144,10 @@ const Satisfy = () => {
               </div>
             </div>
 
-            {/* Footer: Controls and Active Profile */}
+    
             <div className="d-flex justify-content-between align-items-center gap-3 flex-wrap">
               
-              {/* Dynamic Profile Info */}
+       
               <div className="d-flex align-items-center gap-3">
                 <div className="thumb-img-wrapper">
                   <img 
@@ -163,7 +163,7 @@ const Satisfy = () => {
                 </div>
               </div>
 
-              {/* Buttons */}
+
               <div className="d-inline-flex gap-2">
                 <button 
                   className="btn btn-outline-success" 
